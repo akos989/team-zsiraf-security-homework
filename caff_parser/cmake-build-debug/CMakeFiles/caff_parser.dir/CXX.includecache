@@ -1,0 +1,88 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/block_info.h
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_animation/caff_animation.h
+vector
+-
+ciff_data.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_animation/ciff_data.h
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_animation/ciff_data.h
+string
+-
+vector
+-
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_credits/caff_credits.h
+vector
+-
+string
+-
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_handler.cpp
+vector
+-
+iostream
+-
+fstream
+-
+caff_header/caff_header.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_header/caff_header.h
+constants/constants.hpp
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/constants/constants.hpp
+caff_credits/caff_credits.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_credits/caff_credits.h
+caff_animation/caff_animation.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_animation/caff_animation.h
+block_info.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/block_info.h
+caff_handler.hpp
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_handler.hpp
+output_generation/gif_writer.hpp
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/output_generation/gif_writer.hpp
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_handler.hpp
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_header/caff_header.h
+vector
+-
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/constants/constants.hpp
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/main.cpp
+string
+-
+iostream
+-
+caff_handler.cpp
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/caff_handler.cpp
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/output_generation/gif.h
+stdio.h
+-
+string.h
+-
+stdint.h
+-
+stdbool.h
+-
+stdlib.h
+-
+stdlib.h
+-
+stdlib.h
+-
+stdlib.h
+-
+
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/output_generation/gif_writer.hpp
+gif.h
+C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/output_generation/gif.h
+
