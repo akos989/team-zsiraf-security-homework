@@ -5,6 +5,8 @@ class CaffHandler {
 private:
     long long readPos = 0;
     long long parsedAnimations = 0;
+    bool isHeaderParsed = false;
+    bool isCreditsParsed = false;
     std::vector<unsigned char> rawCaffData;
 
     CaffHeader header;
@@ -21,7 +23,7 @@ public:
     CaffAnimation createAnimationFromBytes(long long start);
     BlockInfo createBlockInfoFromBytes(long long start);
     void readBlock(long long start);
-    void parseCaff(std::string filename);
+    void parseCaff(std::string infilename, std::string outfilename);
 
 
 };

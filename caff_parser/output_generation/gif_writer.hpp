@@ -4,7 +4,7 @@
 
 #include "gif.h"
 
-void writeToFile(const std::vector<CaffAnimation>& animations, const char *output_file) {
+void writeToFile(const std::vector<CaffAnimation>& animations, const char* output_file) {
     GifWriter gw;
     if(!animations.empty())
     {

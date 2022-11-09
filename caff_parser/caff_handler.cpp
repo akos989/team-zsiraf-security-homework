@@ -75,16 +75,11 @@ CiffData CaffHandler::createCiffDataFromBytes(long long start) {
 
     long long pic_start = start + ciff.header_size;
     std::vector<uint8_t> pic;
-    int alpha = 2;
+    int alpha = 0;
     for (long long int i = pic_start; i < pic_start + ciff.content_size; i++) {
-        if (alpha == 2) {
-            alpha = 0;
-        }
-        else {
-            alpha++;
-        }
         pic.push_back(rawCaffData.at(i));
-        if (alpha == 2) {
+        ++alpha;
+        if (alpha % 3 == 0) {
             pic.push_back(int8_t(255));
         }
     }
@@ -149,14 +144,33 @@ void CaffHandler::readBlock(long long start) {
 
     switch (blockInfo.type_id) {
         case 1:
+            if(isHeaderParsed)
+            {
+                throw "error More than 1 header block present!";
+            }
             header = createHeaderFromBytes(start + BLOCK_ID_LENGTH + BLOCK_LENGTH_LENGTH);
+            isHeaderParsed = true;
             break;
         case 2:
+            if(!isHeaderParsed)
+            {
+                throw "error Header not parsed yet!";
+            }
+            if(isCreditsParsed)
+            {
+                throw "error More than 1 credits block present!";
+            }
             credits = createCreditsFromBytes(start + BLOCK_ID_LENGTH + BLOCK_LENGTH_LENGTH);
+            isCreditsParsed = true;
             break;
         case 3:
+            if(!isHeaderParsed)
+            {
+                throw "error Header not parsed yet!";
+            }
             animations.push_back(createAnimationFromBytes(start + BLOCK_ID_LENGTH + BLOCK_LENGTH_LENGTH));
-            ++parsedAnimations;            break;
+            ++parsedAnimations;
+            break;
         default:
             std::cerr << "Error parsing block header" << std::endl;
             throw "error parsing block header";
@@ -166,9 +180,8 @@ void CaffHandler::readBlock(long long start) {
 
 }
 
-void CaffHandler::parseCaff(std::string filename) {
-    std::ifstream stream(filename, std::ios::in | std::ios::binary);
-
+void CaffHandler::parseCaff(std::string infilename, std::string outfilename) {
+    std::ifstream stream(infilename, std::ios::in | std::ios::binary);
     rawCaffData = std::vector<uint8_t>(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
 
     long long fileSize = rawCaffData.size();
@@ -179,11 +192,15 @@ void CaffHandler::parseCaff(std::string filename) {
 
     if (rawCaffData.empty())
     {
-        throw "error CAFF has 0 frames!";
+        throw "error Caff has 0 frames!";
     }
     if (parsedAnimations != header.num_anim) {
         throw "error num_anim does not match ciff animations parsed";
     }
 
-    writeToFile(animations, "output.gif");
+    if(outfilename.empty())
+    {
+        outfilename = "output.gif";
+    }
+    writeToFile(animations, outfilename.c_str());
 }
