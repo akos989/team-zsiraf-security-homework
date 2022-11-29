@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ZsirafWebShop.Dal.Entities;
+using ZsirafWebShop.Transfer.Models.Caff;
+using ZsirafWebShop.Transfer.Models.Comment;
 using ZsirafWebShop.Transfer.Models.User;
 
 namespace ZsirafWebShop.Bll.Mapping
@@ -11,6 +13,8 @@ namespace ZsirafWebShop.Bll.Mapping
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<CaffFile, CaffDto>();
+                cfg.CreateMap<Comment, CommentDto>();
             });
 
             config.AssertConfigurationIsValid();

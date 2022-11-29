@@ -6,6 +6,8 @@ using System.Text;
 using ZsirafWebShop.Api.Middlewares;
 using ZsirafWebShop.Bll.Mapping;
 using ZsirafWebShop.Bll.Services.Auth;
+using ZsirafWebShop.Bll.Services.Caff;
+using ZsirafWebShop.Bll.Services.Payment;
 using ZsirafWebShop.Dal.Context;
 using ZsirafWebShop.Dal.Entities;
 
@@ -92,6 +94,8 @@ namespace ZsirafWebShop.Api
             services.AddAuthorization();
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICaffService, CaffService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             //services.AddScoped<IUserService, UserService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
