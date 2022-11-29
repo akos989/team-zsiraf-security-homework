@@ -13,7 +13,7 @@ namespace ZsirafWebShop.Bll.Mapping
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDto>();
-                cfg.CreateMap<CaffFile, CaffDto>();
+                cfg.CreateMap<Caff, CaffDto>();
                 cfg.CreateMap<Comment, CommentDto>();
             });
 

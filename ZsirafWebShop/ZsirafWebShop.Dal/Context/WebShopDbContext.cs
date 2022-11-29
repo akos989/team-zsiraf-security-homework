@@ -27,15 +27,15 @@ namespace ZsirafWebShop.Dal.Context
 
             builder.Entity<CaffToUser>(entity =>
             {
-                entity.HasKey(cfu => new {cfu.CaffFileId, cfu.UserId});
+                entity.HasKey(cfu => new {cfu.CaffId, cfu.UserId});
 
                 entity.HasOne(cfu => cfu.User)
                     .WithMany(u => u.PurchasedCaffs)
-                    .HasForeignKey(cfu => cfu.CaffFileId);
+                    .HasForeignKey(cfu => cfu.CaffId);
 
                 entity.HasOne(cfu => cfu.Caff)
                     .WithMany(cf => cf.Buyers)
-                    .HasForeignKey(cfu => cfu.CaffFileId);
+                    .HasForeignKey(cfu => cfu.CaffId);
             });
 
             builder.Entity<Comment>(entity =>

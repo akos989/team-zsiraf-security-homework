@@ -10,7 +10,7 @@ namespace ZsirafWebShop.Transfer.Models.Caff
         public string Description { get; set; }
         public int CreatorId { get; set; }
         public long Price { get; set; }
-        public string CaffFileRef { get; set; }
+        public string CaffRef { get; set; }
 
         public virtual UserDto Creator { get; set; }
         public virtual ICollection<UserDto> Buyers { get; set; }
