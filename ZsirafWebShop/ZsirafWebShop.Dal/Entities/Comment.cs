@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public string Text { get; set; }
         public int UserId { get; set; }
-        public int CaffFileId { get; set; }
+        public int CaffId { get; set; }
         public virtual User User { get; set; }
-        public virtual CaffFile CaffFile { get; set; }
+        public virtual Caff Caff { get; set; }
     }
 }
