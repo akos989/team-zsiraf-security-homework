@@ -1,4 +1,4 @@
-﻿using ZsirafWebShop.Transfer.Models.Caff;
+﻿using ZsirafWebShop.Transfer.Models.Caffs;
 
 namespace ZsirafWebShop.Bll.Services.Caff
 {

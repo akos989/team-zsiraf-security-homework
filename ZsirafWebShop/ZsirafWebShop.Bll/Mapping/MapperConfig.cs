@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ZsirafWebShop.Dal.Entities;
-using ZsirafWebShop.Transfer.Models.Caff;
-using ZsirafWebShop.Transfer.Models.Comment;
+using ZsirafWebShop.Transfer.Models.Caffs;
+using ZsirafWebShop.Transfer.Models.Comments;
 using ZsirafWebShop.Transfer.Models.User;
 
 namespace ZsirafWebShop.Bll.Mapping

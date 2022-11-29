@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ZsirafWebShop.Api.AuthorizationHandlers;
 using ZsirafWebShop.Api.Middlewares;
 using ZsirafWebShop.Bll.Mapping;
 using ZsirafWebShop.Bll.Services.Auth;
@@ -91,8 +93,16 @@ namespace ZsirafWebShop.Api
             //        .AllowCredentials());
             //});
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CaffCreatorOnly", policy =>
+                    policy.Requirements.Add(new CaffCreatorRequirement()));
+                options.AddPolicy("CommentCreatorOnly", policy =>
+                    policy.Requirements.Add(new CommentCreatorRequirement()));
+            });
 
+            services.AddSingleton<IAuthorizationHandler, CaffAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, CommentAuthorizationHandler>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICaffService, CaffService>();
             services.AddScoped<IPaymentService, PaymentService>();

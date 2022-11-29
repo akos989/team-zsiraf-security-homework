@@ -1,4 +1,4 @@
-﻿namespace ZsirafWebShop.Transfer.Models.Caff
+﻿namespace ZsirafWebShop.Transfer.Models.Caffs
 {
     public class CreateCaffDto
     {

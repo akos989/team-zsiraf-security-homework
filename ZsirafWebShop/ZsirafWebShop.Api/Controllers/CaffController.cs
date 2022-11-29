@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZsirafWebShop.Bll.Services.Caff;
-using ZsirafWebShop.Transfer.Models.Caff;
+using ZsirafWebShop.Transfer.Models.Caffs;
 
 namespace ZsirafWebShop.Api.Controllers
 {
@@ -38,10 +38,12 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.CreateAsync(caff);
 
         [HttpPut]
+        [Authorize(Roles = "Admin", Policy = "CaffCreatorOnly")]
         public async Task<CaffDto> UpdateAsync([FromBody] UpdateCaffDto caff)
             => await caffService.UpdateAsync(caff);
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin", Policy = "CaffCreatorOnly")]
         public async Task DeleteByIdAsync(int id)
             => await caffService.DeleteByIdAsync(id);
 

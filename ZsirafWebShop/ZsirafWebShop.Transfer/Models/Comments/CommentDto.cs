@@ -1,7 +1,7 @@
-﻿using ZsirafWebShop.Transfer.Models.Caff;
+﻿using ZsirafWebShop.Transfer.Models.Caffs;
 using ZsirafWebShop.Transfer.Models.User;
 
-namespace ZsirafWebShop.Transfer.Models.Comment
+namespace ZsirafWebShop.Transfer.Models.Comments
 {
     public class CommentDto
     {
@@ -9,7 +9,7 @@ namespace ZsirafWebShop.Transfer.Models.Comment
         public string Text { get; set; }
         public int UserId { get; set; }
         public int CaffId { get; set; }
-        public virtual UserDto User { get; set; }
-        public virtual CaffDto Caff { get; set; }
+        public UserDto User { get; set; }
+        public CaffDto Caff { get; set; }
     }
 }

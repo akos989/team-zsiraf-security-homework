@@ -1,7 +1,7 @@
-﻿using ZsirafWebShop.Transfer.Models.Comment;
+﻿using ZsirafWebShop.Transfer.Models.Comments;
 using ZsirafWebShop.Transfer.Models.User;
 
-namespace ZsirafWebShop.Transfer.Models.Caff
+namespace ZsirafWebShop.Transfer.Models.Caffs
 {
     public class CaffDto
     {
@@ -12,8 +12,8 @@ namespace ZsirafWebShop.Transfer.Models.Caff
         public long Price { get; set; }
         public string CaffRef { get; set; }
 
-        public virtual UserDto Creator { get; set; }
-        public virtual ICollection<UserDto> Buyers { get; set; }
-        public virtual ICollection<CommentDto> Comments { get; set; }
+        public UserDto Creator { get; set; }
+        public ICollection<UserDto> Buyers { get; set; }
+        public ICollection<CommentDto> Comments { get; set; }
     }
 }
