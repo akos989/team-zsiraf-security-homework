@@ -1,6 +1,6 @@
-<div class="login-view-wrapper">
-  <h1 class="mb-5">Log in to the application</h1>
-  <form class="login-form-wrapper">
+<div class="signup-view-wrapper">
+  <h1 class="mb-5">Sign up to the application</h1>
+  <form class="signup-form-wrapper">
     <!--email input-->
     <mat-form-field class="input mt-5">
       <mat-label class="label">Email</mat-label>
@@ -22,10 +22,19 @@
       </mat-error>
     </mat-form-field>
 
-    <!--submit button-->
-    <button class="mt-5" mat-raised-button color="primary">Log in</button>
+    <!--confirmation password input-->
+    <mat-form-field class="input mt-5">
+      <mat-label class="label">Confirmation password</mat-label>
+      <input type="password" matInput [formControl]="confirmationPasswordFormControl">
+      <mat-error *ngIf="confirmationPasswordFormControl.hasError('required')">
+        Confirmation password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="confirmationPasswordFormControl.hasError('notSame')">
+        Passwords don't<strong>match</strong>
+      </mat-error>
+    </mat-form-field>
 
-    <!--sign up link-->
-    <a class="sign-up-link mt-2 mb-5" href="/signup">Sign up</a>
+    <!--submit button-->
+    <button class="mt-5 mb-5" mat-raised-button color="primary">Sign up</button>
   </form>
 </div>
