@@ -17,6 +17,8 @@ import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingComponent } from './view/loading/loading.component';
+import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { LoadingComponent } from './view/loading/loading.component';
     SignupComponent,
     SuccessDialogComponent,
     ErrorDialogComponent,
-    LoadingComponent
+    LoadingComponent,
+    EditCaffComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { LoadingComponent } from './view/loading/loading.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    NgxDropzoneModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
