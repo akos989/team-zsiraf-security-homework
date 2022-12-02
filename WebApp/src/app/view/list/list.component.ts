@@ -3,7 +3,9 @@ import {Caff} from "../../model/caff.model";
 import {Router} from "@angular/router";
 import {CaffUsageType} from "../../model/caff-usage-type.enum";
 import {CaffService} from "../../service/caff.service";
-import {Observable} from "rxjs";
+import {tap} from "rxjs";
+import {LoaderService} from "../../service/loader.service";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-list',
@@ -14,7 +16,10 @@ export class ListComponent {
   caffUsageType = CaffUsageType.neutral;
   caffList: Caff[] = []
 
-  constructor(private router: Router, private caffService: CaffService) {
+  constructor(
+    private router: Router,
+    private caffService: CaffService,
+    private loaderService: LoaderService) {
     this.getParamsFromRoute();
     this.fetchCaffList();
   }
@@ -27,15 +32,29 @@ export class ListComponent {
   }
 
   private fetchCaffList() {
-    let fetchCaffSub: Observable<Caff[]>;
-    switch (this.caffUsageType) {
-      case CaffUsageType.admin || CaffUsageType.neutral: fetchCaffSub = this.caffService.fetchAllCaff(); break;
-      case CaffUsageType.purchased: fetchCaffSub = this.caffService.fetchPurchasedCaff(); break;
-      case CaffUsageType.uploaded: fetchCaffSub = this.caffService.fetchUploadedCaff(); break;
-      default: fetchCaffSub = this.caffService.fetchAllCaff(); break;
-    }
-    fetchCaffSub.subscribe(caffs => {
-      this.caffList = caffs;
+    this.loaderService.show();
+
+    const fetchCaffSub = (() => {
+      switch (this.caffUsageType) {
+        case CaffUsageType.admin || CaffUsageType.neutral: return this.caffService.fetchAllCaff();
+        case CaffUsageType.purchased: return this.caffService.fetchPurchasedCaff();
+        case CaffUsageType.uploaded: return this.caffService.fetchUploadedCaff();
+        default: return this.caffService.fetchAllCaff();
+      }
+    })();
+
+    fetchCaffSub
+      .pipe(
+        tap(_ => {
+          this.loaderService.hide();
+        }),
+        catchError((error, caught) => {
+          console.log(error); // Todo: show some error dialog
+          return caught;
+        })
+      )
+      .subscribe(caffs => {
+        this.caffList = caffs;
     });
   }
 
