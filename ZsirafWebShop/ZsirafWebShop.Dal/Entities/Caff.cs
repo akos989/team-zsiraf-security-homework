@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int CreatorId { get; set; }
         public long Price { get; set; }
-        public string CaffRef { get; set; }
+        public string CaffRef { get; set; } = string.Empty;
 
         public virtual User Creator { get; set; }
         public virtual ICollection<User> Buyers { get; set; }

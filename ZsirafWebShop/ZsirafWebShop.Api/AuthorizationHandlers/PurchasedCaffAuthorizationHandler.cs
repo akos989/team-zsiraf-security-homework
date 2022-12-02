@@ -4,10 +4,10 @@ using ZsirafWebShop.Dal.Entities;
 
 namespace ZsirafWebShop.Api.AuthorizationHandlers
 {
-    public class PurchasedCaffAuthorizationHandler : AuthorizationHandler<CommentCreatorRequirement, Caff>
+    public class PurchasedCaffAuthorizationHandler : AuthorizationHandler<CommentCreatorOrAdminRequirement, Caff>
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-                                                       CommentCreatorRequirement requirement,
+                                                       CommentCreatorOrAdminRequirement requirement,
                                                        Caff resource)
         {
             if (int.TryParse(context.User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))

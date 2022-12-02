@@ -22,7 +22,6 @@ namespace ZsirafWebShop.Api.Controllers
             => await commentService.CreateAsync(comment);
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin", Policy = "CommentCreatorOnly")]
         public async Task DeleteByIdAsync(int id)
             => await commentService.DeleteByIdAsync(id);
     }

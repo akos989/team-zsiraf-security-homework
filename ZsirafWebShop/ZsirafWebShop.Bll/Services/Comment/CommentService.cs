@@ -55,7 +55,7 @@ namespace ZsirafWebShop.Bll.Services.Comment
                 throw new ArgumentException($"Comment not found!");
             }
 
-            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CommentCreatorOnly");
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CommentCreatorOrAdminOnly");
 
             if (authorizationResult.Succeeded)
             {

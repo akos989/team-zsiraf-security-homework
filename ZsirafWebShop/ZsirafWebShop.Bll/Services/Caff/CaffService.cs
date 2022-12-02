@@ -61,7 +61,7 @@ namespace ZsirafWebShop.Bll.Services.Caff
                 throw new ArgumentException($"Caff not found!");
             }
 
-            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOnly");
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOrAdminOnly");
 
             if (!authorizationResult.Succeeded)
             {
@@ -153,7 +153,7 @@ namespace ZsirafWebShop.Bll.Services.Caff
                 throw new ArgumentException($"Caff not found with id: {caff.Id}!");
             }
 
-            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOnly");
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOrAdminOnly");
 
             if (!authorizationResult.Succeeded)
             {

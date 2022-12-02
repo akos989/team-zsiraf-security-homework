@@ -97,10 +97,10 @@ namespace ZsirafWebShop.Api
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("CaffCreatorOnly", policy =>
-                    policy.Requirements.Add(new CaffCreatorRequirement()));
-                options.AddPolicy("CommentCreatorOnly", policy =>
-                    policy.Requirements.Add(new CommentCreatorRequirement()));
+                options.AddPolicy("CaffCreatorOrAdminOnly", policy =>
+                    policy.Requirements.Add(new CaffCreatorOrAdminRequirement()));
+                options.AddPolicy("CommentCreatorOrAdminOnly", policy =>
+                    policy.Requirements.Add(new CommentCreatorOrAdminRequirement()));
                 options.AddPolicy("Purchased", policy =>
                     policy.Requirements.Add(new PurchasedCaffRequirement()));
             });
