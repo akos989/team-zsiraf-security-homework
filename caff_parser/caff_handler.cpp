@@ -181,15 +181,16 @@ void CaffHandler::readBlock(long long start) {
 }
 
 void CaffHandler::parseCaff(std::string infilename, std::string outfilename) {
-    std::ifstream stream(infilename, std::ios::in | std::ios::binary);
-    rawCaffData = std::vector<uint8_t>(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
+    {
+        std::ifstream stream(infilename, std::ios::in | std::ios::binary);
+        rawCaffData = std::vector<uint8_t>(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
 
-    long long fileSize = rawCaffData.size();
-    do {
-        readBlock(readPos);
+        long long fileSize = rawCaffData.size();
+        do {
+            readBlock(readPos);
 
-    } while (readPos < fileSize);
-
+        } while (readPos < fileSize);
+    }
     if (rawCaffData.empty())
     {
         throw "error Caff has 0 frames!";
@@ -197,6 +198,7 @@ void CaffHandler::parseCaff(std::string infilename, std::string outfilename) {
     if (parsedAnimations != header.num_anim) {
         throw "error num_anim does not match ciff animations parsed";
     }
+
 
     if(outfilename.empty())
     {
