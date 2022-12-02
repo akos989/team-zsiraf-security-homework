@@ -9,12 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './view/login/login.component';
 import { SignupComponent } from './view/signup/signup.component';
+import { SuccessDialogComponent } from './dialog/success-dialog/success-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,7 @@ import { SignupComponent } from './view/signup/signup.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule,
     ReactiveFormsModule
   ],
   providers: [],

@@ -1,0 +1,17 @@
+.success-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 8rem;
+    align-self: center;
+  }
+
+  h1 {
+    align-self: center;
+  }
+
+  button {
+    align-self: center;
+  }
+}
