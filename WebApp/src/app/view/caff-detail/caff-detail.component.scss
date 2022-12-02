@@ -1,0 +1,34 @@
+div {
+  text-align: center;
+  div {
+    div {
+      img {
+        max-width: 100%;
+        background-size: contain;
+      }
+    }
+    div {
+      text-align: center;
+
+      button {
+        display: block;
+        margin: 15px auto;
+      }
+    }
+  }
+  mat-expansion-panel {
+    mat-panel-title {
+      color: black;
+    }
+    color: black;
+    background-color: white;
+
+    mat-list-item {
+      color: black;
+    }
+
+    mat-divider {
+      background-color: black;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+[
+
+  {
+    "id": "randomid7",
+    "price": 455,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "malac Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      }
+    ]
+  },
+  {
+    "id": "randomid8",
+    "price": 455,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "snow Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      }
+    ]
+  },
+  {
+    "id": "randomid9",
+    "price": 455,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "heyy Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      }
+    ]
+  }
+]
