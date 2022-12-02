@@ -11,13 +11,22 @@ import { LoginComponent } from './view/login/login.component';
 import { SignupComponent } from './view/signup/signup.component';
 import { SuccessDialogComponent } from './dialog/success-dialog/success-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ListComponent } from './view/list/list.component';
+import {MatCardModule} from "@angular/material/card";
+import { CaffDetailComponent } from './view/caff-detail/caff-detail.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatListModule} from "@angular/material/list";
+import { NavigationComponent } from './view/navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ListComponent,
+    CaffDetailComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +35,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

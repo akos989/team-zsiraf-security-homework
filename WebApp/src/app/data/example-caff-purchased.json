@@ -1,0 +1,65 @@
+[
+  {
+    "id": "randomid1",
+    "price": 455,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "Kutye Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "jani",
+        "commentString": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries u kerdes van itt??"
+      },
+      {
+        "author": "albi",
+        "commentString": " u kerdes van itt??"
+      },
+      {
+        "author": "feri",
+        "commentString": "te vagy az a lany?"
+      }
+    ]
+  },
+  {
+    "id": "randomid2",
+    "price": 12,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "Macka Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "akos",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      }
+    ]
+  },
+  {
+    "id": "randomid3",
+    "price": 13331,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "Szobor Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": [
+      {
+        "author": "fer",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      },
+      {
+        "author": "laci",
+        "commentString": "Valammi random hossy u kerdes van itt??"
+      }
+    ]
+  },
+  {
+    "id": "randomid4",
+    "price": 556,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+    "name": "Kutye Caff",
+    "gifUrl": "assets/gifs/im-downloading-nathan-brown.gif",
+    "comments": []
+  }
+]

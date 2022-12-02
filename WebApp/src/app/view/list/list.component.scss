@@ -1,0 +1,13 @@
+mat-card {
+  max-width: 300px;
+  background-color: var(--element-background);
+  color:  var(--element-text-color);
+
+  img {
+    background-size: cover;
+  }
+
+  mat-card-content {
+    text-align: center;
+  }
+}
