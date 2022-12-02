@@ -47,7 +47,7 @@ namespace ZsirafWebShop.Api.Controllers
         public async Task DeleteByIdAsync(int id)
             => await caffService.DeleteByIdAsync(id);
 
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
         public async Task PurchaseAsync(int id)
             => await caffService.PurchaseAsync(id);
     }

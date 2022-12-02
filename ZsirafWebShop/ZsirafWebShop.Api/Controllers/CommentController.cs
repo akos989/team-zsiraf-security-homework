@@ -18,7 +18,6 @@ namespace ZsirafWebShop.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "Purchased")] // TODO Purchased
         public async Task<CommentDto> CreateAsync([FromBody] CreateCommentDto comment)
             => await commentService.CreateAsync(comment);
 

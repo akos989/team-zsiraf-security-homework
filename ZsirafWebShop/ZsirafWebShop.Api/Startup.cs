@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ZsirafWebShop.Api.AuthorizationHandlers;
+using ZsirafWebShop.Api.Helpers;
 using ZsirafWebShop.Api.Middlewares;
 using ZsirafWebShop.Bll.Mapping;
 using ZsirafWebShop.Bll.Services.Auth;
 using ZsirafWebShop.Bll.Services.Caff;
+using ZsirafWebShop.Bll.Services.Jwt;
 using ZsirafWebShop.Bll.Services.Payment;
 using ZsirafWebShop.Dal.Context;
 using ZsirafWebShop.Dal.Entities;
@@ -99,14 +101,19 @@ namespace ZsirafWebShop.Api
                     policy.Requirements.Add(new CaffCreatorRequirement()));
                 options.AddPolicy("CommentCreatorOnly", policy =>
                     policy.Requirements.Add(new CommentCreatorRequirement()));
+                options.AddPolicy("Purchased", policy =>
+                    policy.Requirements.Add(new PurchasedCaffRequirement()));
             });
 
             services.AddSingleton<IAuthorizationHandler, CaffAuthorizationHandler>();
             services.AddSingleton<IAuthorizationHandler, CommentAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, PurchasedCaffAuthorizationHandler>();
+
+            services.AddSingleton<IJwtService, JwtService>();
+            
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICaffService, CaffService>();
             services.AddScoped<IPaymentService, PaymentService>();
-            //services.AddScoped<IUserService, UserService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
@@ -130,6 +137,7 @@ namespace ZsirafWebShop.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseHttpException();
 
             //app.UseCors("CorsPolicy");
 

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using ZsirafWebShop.Bll.Exceptions;
 using ZsirafWebShop.Dal.Context;
 using ZsirafWebShop.Transfer.Models.Comments;
 
@@ -11,14 +13,16 @@ namespace ZsirafWebShop.Bll.Services.Comment
         private readonly WebShopDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IAuthorizationService authorizationService;
 
         private string UserId => httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public CommentService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public CommentService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IAuthorizationService authorizationService)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
+            this.authorizationService = authorizationService;
         }
 
         public async Task<CommentDto> CreateAsync(CreateCommentDto comment)
@@ -51,8 +55,18 @@ namespace ZsirafWebShop.Bll.Services.Comment
                 throw new ArgumentException($"Comment not found!");
             }
 
-            dbContext.Comments.Remove(entity);
-            await dbContext.SaveChangesAsync();
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CommentCreatorOnly");
+
+            if (authorizationResult.Succeeded)
+            {
+                dbContext.Comments.Remove(entity);
+                await dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new HttpException(403, $"User with id:{UserId} cannot delete comment with id:{id}");
+            }
+
         }
     }
 }
