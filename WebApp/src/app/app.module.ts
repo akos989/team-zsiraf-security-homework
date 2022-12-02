@@ -11,13 +11,15 @@ import { LoginComponent } from './view/login/login.component';
 import { SignupComponent } from './view/signup/signup.component';
 import { SuccessDialogComponent } from './dialog/success-dialog/success-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorDialogComponent } from './dialog/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
