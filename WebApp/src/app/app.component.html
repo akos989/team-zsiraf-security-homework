@@ -1,1 +1,11 @@
+<!-- loading spinner -->
+<div *ngIf="isLoading" class="loader-container">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<!-- application -->
 <router-outlet></router-outlet>
+
