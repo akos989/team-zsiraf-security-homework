@@ -4,7 +4,7 @@
     <!--caff file-->
     <div *ngIf="files.length > 0" class="gif-wrapper input mt-5">
       <img class="gif" src="assets/icon/tick.svg">
-      <img class="delete" src="assets/icon/delete.svg">
+      <img class="delete" src="assets/icon/delete.svg" (click)="onDeleteButtonClick()">
     </div>
 
     <!--dropzone-->

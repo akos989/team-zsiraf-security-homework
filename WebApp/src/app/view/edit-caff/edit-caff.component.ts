@@ -22,8 +22,8 @@ export class EditCaffComponent implements OnInit {
     this.files.push(...event.addedFiles);
   }
 
-  onRemove(event: any) {
-    this.files.splice(this.files.indexOf(event), 1);
+  onDeleteButtonClick() {
+    this.files.splice(0, 1);
   }
 
   onSaveButtonClick() {
