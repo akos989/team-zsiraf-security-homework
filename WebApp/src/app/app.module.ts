@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoadingComponent } from './view/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginComponent,
     SignupComponent,
     SuccessDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

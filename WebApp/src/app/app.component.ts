@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LoaderService } from './service/loader.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +7,8 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent {
   title = 'WebApp';
-  loadingSubject: Subject<boolean> = this.loaderService.isLoading;
-  isLoading: boolean = false;
 
-  constructor(
-    private loaderService: LoaderService
-  ){ }
+  constructor(){ }
 
-  ngOnInit() {
-    this.loadingSubject.subscribe((isLoading) => {
-      this.isLoading = isLoading;
-    })
-  }
+  ngOnInit() { }
 }

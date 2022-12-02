@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.error.message) {
           errorMessage = error.error.message;
         }
-        this.dialog.open(ErrorDialogComponent, {data: {message: errorMessage}});
+        this.dialog.open(ErrorDialogComponent, {data: { errorMessage: errorMessage }});
         return throwError(error);
       })
     );
