@@ -8,7 +8,6 @@ namespace ZsirafWebShop.Dal.Context
     public class WebShopDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public DbSet<Caff> Caffs { get; set; }
-        public DbSet<CaffToUser> CaffToUsers { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
         public WebShopDbContext(DbContextOptions<WebShopDbContext> options) : base(options)
@@ -22,20 +21,12 @@ namespace ZsirafWebShop.Dal.Context
             builder.Entity<Caff>(entity =>
             {
                 entity.HasOne(cf => cf.Creator)
-                    .WithMany(cf => cf.CreatedCaffs);
-            });
+                    .WithMany(u => u.CreatedCaffs)
+                    .HasForeignKey(cf => cf.CreatorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
-            builder.Entity<CaffToUser>(entity =>
-            {
-                entity.HasKey(cfu => new {cfu.CaffId, cfu.UserId});
-
-                entity.HasOne(cfu => cfu.User)
-                    .WithMany(u => u.PurchasedCaffs)
-                    .HasForeignKey(cfu => cfu.CaffId);
-
-                entity.HasOne(cfu => cfu.Caff)
-                    .WithMany(cf => cf.Buyers)
-                    .HasForeignKey(cfu => cfu.CaffId);
+                entity.HasMany(cf => cf.Buyers)
+                    .WithMany(u => u.PurchasedCaffs);
             });
 
             builder.Entity<Comment>(entity =>
@@ -48,6 +39,34 @@ namespace ZsirafWebShop.Dal.Context
                     .WithMany()
                     .HasForeignKey(c => c.UserId);
             });
+
+            builder.Entity<IdentityRole<int>>().HasData(
+                new IdentityRole<int> { Id = 1, Name = "User", ConcurrencyStamp = "1", NormalizedName = "USER" },
+                new IdentityRole<int> { Id = 2, Name = "Admin", ConcurrencyStamp = "2", NormalizedName = "ADMIN" }
+                );
+
+            SeedAdmin(builder);
+
+        }
+
+        private void SeedAdmin(ModelBuilder builder)
+        {
+            User user = new()
+            {
+                Id = 1,
+                UserName = "admin",
+                Email = "admin@zsiraf.com",
+                LockoutEnabled = false,
+                PhoneNumber = ""
+            };
+
+            var passwordHasher = new PasswordHasher<User>();
+            user.PasswordHash = passwordHasher.HashPassword(user, "Admin123");
+
+            builder.Entity<User>().HasData(user);
+
+            builder.Entity<IdentityUserRole<int>>().HasData(
+                new IdentityUserRole<int> { RoleId = 2, UserId = 1 });
         }
     }
 }

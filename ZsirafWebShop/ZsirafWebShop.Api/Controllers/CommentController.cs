@@ -18,12 +18,10 @@ namespace ZsirafWebShop.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "Purchased")] // TODO Purchased
         public async Task<CommentDto> CreateAsync([FromBody] CreateCommentDto comment)
             => await commentService.CreateAsync(comment);
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin", Policy = "CommentCreatorOnly")]
         public async Task DeleteByIdAsync(int id)
             => await commentService.DeleteByIdAsync(id);
     }

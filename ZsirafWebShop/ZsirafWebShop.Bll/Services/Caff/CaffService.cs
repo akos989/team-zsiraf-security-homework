@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using ZsirafWebShop.Bll.Exceptions;
 using ZsirafWebShop.Bll.Services.Payment;
 using ZsirafWebShop.Dal.Context;
 using ZsirafWebShop.Transfer.Models.Caffs;
@@ -14,15 +16,17 @@ namespace ZsirafWebShop.Bll.Services.Caff
         private readonly IMapper mapper;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IPaymentService paymentService;
+        private readonly IAuthorizationService authorizationService;
 
         private string UserId => httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public CaffService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IPaymentService paymentService)
+        public CaffService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IPaymentService paymentService, IAuthorizationService authorizationService)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
             this.paymentService = paymentService;
+            this.authorizationService = authorizationService;
         }
 
         public async Task<CaffDto> CreateAsync(CreateCaffDto caff)
@@ -57,6 +61,13 @@ namespace ZsirafWebShop.Bll.Services.Caff
                 throw new ArgumentException($"Caff not found!");
             }
 
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOrAdminOnly");
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new HttpException(403, $"User with id:{UserId} cannot delete Caff with id:{id}");
+            }
+            
             dbContext.Caffs.Remove(entity);
             await dbContext.SaveChangesAsync();
         }
@@ -108,6 +119,18 @@ namespace ZsirafWebShop.Bll.Services.Caff
 
         public async Task PurchaseAsync(int id)
         {
+            var user = await dbContext.Users
+                .FirstOrDefaultAsync(u => u.Id == int.Parse(UserId));
+
+            if (user == null) { throw new ArgumentException($"User with id:{UserId} not found"); }
+
+            var entity = await dbContext.Caffs
+               .Include(a => a.Creator)
+               .Include(a => a.Buyers)
+               .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (entity == null) { throw new ArgumentException($"Caff with id:{id} not found"); }
+
             var result = await paymentService.PurchaseAsync(int.Parse(UserId), id);
 
             if (!result)
@@ -115,16 +138,7 @@ namespace ZsirafWebShop.Bll.Services.Caff
                 throw new ArgumentException($"Payment failed!");
             }
 
-            var entity = await dbContext.Caffs
-               .Include(a => a.Creator)
-               .Include(a => a.Buyers)
-               .FirstOrDefaultAsync(a => a.Id == id);
-
-            entity.Buyers.Add(new Dal.Entities.CaffToUser
-            {
-                CaffId = id,
-                UserId = int.Parse(UserId)
-            });
+            entity.Buyers.Add(user);
             await dbContext.SaveChangesAsync();
 
             return;
@@ -137,6 +151,13 @@ namespace ZsirafWebShop.Bll.Services.Caff
             if (entity == null)
             {
                 throw new ArgumentException($"Caff not found with id: {caff.Id}!");
+            }
+
+            var authorizationResult = await authorizationService.AuthorizeAsync(httpContextAccessor.HttpContext.User, entity, "CaffCreatorOrAdminOnly");
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new HttpException(403, $"User with id:{UserId} cannot update Caff with id:{caff.Id}");
             }
 
             entity.Price = caff.Price;

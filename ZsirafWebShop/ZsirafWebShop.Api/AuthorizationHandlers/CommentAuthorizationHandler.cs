@@ -5,13 +5,14 @@ using ZsirafWebShop.Dal.Entities;
 namespace ZsirafWebShop.Api.AuthorizationHandlers
 {
     public class CommentAuthorizationHandler :
-    AuthorizationHandler<CommentCreatorRequirement, Comment>
+    AuthorizationHandler<CommentCreatorOrAdminRequirement, Comment>
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-                                                       CommentCreatorRequirement requirement,
+                                                       CommentCreatorOrAdminRequirement requirement,
                                                        Comment resource)
         {
-            if (context.User.FindFirstValue(ClaimTypes.NameIdentifier) == resource.UserId.ToString())
+            if (context.User.FindFirstValue(ClaimTypes.NameIdentifier) == resource.UserId.ToString() ||
+                context.User.IsInRole("Admin"))
             {
                 context.Succeed(requirement);
             }
@@ -20,5 +21,5 @@ namespace ZsirafWebShop.Api.AuthorizationHandlers
         }
     }
 
-    public class CommentCreatorRequirement : IAuthorizationRequirement { }
+    public class CommentCreatorOrAdminRequirement : IAuthorizationRequirement { }
 }

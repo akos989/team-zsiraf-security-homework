@@ -5,13 +5,14 @@ using ZsirafWebShop.Dal.Entities;
 namespace ZsirafWebShop.Api.AuthorizationHandlers
 {
     public class CaffAuthorizationHandler :
-    AuthorizationHandler<CaffCreatorRequirement, Caff>
+    AuthorizationHandler<CaffCreatorOrAdminRequirement, Caff>
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-                                                       CaffCreatorRequirement requirement,
+                                                       CaffCreatorOrAdminRequirement requirement,
                                                        Caff resource)
         {
-            if (context.User.FindFirstValue(ClaimTypes.NameIdentifier) == resource.CreatorId.ToString())
+            if (context.User.FindFirstValue(ClaimTypes.NameIdentifier) == resource.CreatorId.ToString() ||
+                context.User.IsInRole("Admin"))
             {
                 context.Succeed(requirement);
             }
@@ -20,5 +21,5 @@ namespace ZsirafWebShop.Api.AuthorizationHandlers
         }
     }
 
-    public class CaffCreatorRequirement : IAuthorizationRequirement { }
+    public class CaffCreatorOrAdminRequirement : IAuthorizationRequirement { }
 }

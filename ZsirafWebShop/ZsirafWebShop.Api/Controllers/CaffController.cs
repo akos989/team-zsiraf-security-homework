@@ -38,16 +38,14 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.CreateAsync(caff);
 
         [HttpPut]
-        [Authorize(Roles = "Admin", Policy = "CaffCreatorOnly")]
         public async Task<CaffDto> UpdateAsync([FromBody] UpdateCaffDto caff)
             => await caffService.UpdateAsync(caff);
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin", Policy = "CaffCreatorOnly")]
         public async Task DeleteByIdAsync(int id)
             => await caffService.DeleteByIdAsync(id);
 
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
         public async Task PurchaseAsync(int id)
             => await caffService.PurchaseAsync(id);
     }
