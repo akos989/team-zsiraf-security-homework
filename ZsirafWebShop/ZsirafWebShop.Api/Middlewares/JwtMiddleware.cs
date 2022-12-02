@@ -22,7 +22,7 @@ namespace ZsirafWebShop.Api.Middlewares
                 await _next(context); 
                 return; 
             }
-            else if (user.Item1 != null)
+            else
             {
                 // attach user to context on successful jwt validation
                 context.Items["User"] = await userManager.FindByIdAsync(user.Item1.ToString());
