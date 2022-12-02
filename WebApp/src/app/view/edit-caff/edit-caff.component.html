@@ -1,0 +1,52 @@
+<div class="view-wrapper">
+  <h1>CAFF szerk</h1>
+  <form class="caff-form-wrapper">
+    <!--caff file-->
+    <div *ngIf="files.length > 0" class="gif-wrapper input mt-5">
+      <img class="gif" src="assets/icon/tick.svg">
+      <img class="delete" src="assets/icon/delete.svg" (click)="onDeleteButtonClick()">
+    </div>
+
+    <!--dropzone-->
+    <ngx-dropzone *ngIf="files.length <= 0" class="input mt-5 dropzone" [multiple]="false" (change)="onSelect($event)">
+      <ngx-dropzone-label>Drop your CAFF file here!</ngx-dropzone-label>
+    </ngx-dropzone>
+
+    <!--name-->
+    <mat-form-field class="input mt-4">
+      <mat-label class="label">Name</mat-label>
+      <input matInput [formControl]="nameFormControl">
+      <mat-error *ngIf="nameFormControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!--price-->
+    <mat-form-field class="input mt-4">
+      <mat-label class="label">Price</mat-label>
+      <input type="number" matInput [formControl]="priceFormControl">
+      <span matSuffix>HUF</span>
+      <mat-error *ngIf="priceFormControl.hasError('required')">
+        Price is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="priceFormControl.hasError('max')">
+        Price is too <strong>high</strong>
+      </mat-error>
+      <mat-error *ngIf="priceFormControl.hasError('min')">
+        Price must be <strong>positive</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!--description-->
+    <mat-form-field class="input mt-3">
+      <mat-label class="label">Description</mat-label>
+      <textarea type="text" matInput [formControl]="descriptionFormControl"></textarea>
+      <mat-error *ngIf="descriptionFormControl.hasError('required')">
+        Description is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!--save button-->
+    <button type="button" class="mt-5 mb-5" mat-raised-button color="primary" (click)="onSaveButtonClick()">Save</button>
+  </form>
+</div>

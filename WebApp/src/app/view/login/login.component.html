@@ -23,9 +23,9 @@
     </mat-form-field>
 
     <!--submit button-->
-    <button class="mt-5" mat-raised-button color="primary">Log in</button>
+    <button type="button" class="mt-5" mat-raised-button color="primary" (click)="onLoginButtonClick()">Log in</button>
 
     <!--sign up link-->
-    <a class="sign-up-link mt-2 mb-5" href="/signup">Sign up</a>
+    <a class="sign-up-link mt-2 mb-5" routerLink="/signup">Sign up</a>
   </form>
 </div>

@@ -4,6 +4,7 @@ import { LoginComponent } from './view/login/login.component';
 import { SignupComponent } from './view/signup/signup.component';
 import {ListComponent} from "./view/list/list.component";
 import {CaffDetailComponent} from "./view/caff-detail/caff-detail.component";
+import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'uploaded', component: ListComponent },
   { path: 'purchased', component: ListComponent },
   { path: 'detail', component: CaffDetailComponent },
+  { path: 'edit', component: EditCaffComponent },
 
   // for 404 pages
   { path: '**', pathMatch: 'full', redirectTo: 'login' },

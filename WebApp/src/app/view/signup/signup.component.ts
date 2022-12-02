@@ -3,7 +3,8 @@ import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
-import {SuccessDialogComponent} from "../../dialog/success-dialog/success-dialog.component";
+import { SuccessDialogComponent } from '../../dialog/success-dialog/success-dialog.component';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-signup',
@@ -20,12 +21,18 @@ export class SignupComponent implements OnInit {
   confirmationPasswordFormControl = new FormControl('', [Validators.required, this.checkPasswords]);
 
   constructor(private dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   onSignupButtonClick() {
+    this.http.get<any>('https://api.openweathermap.org/data/2.5/weather?lat=47.497913&lon=19.040236&appid=107eca7031d101001ab347376dbe2747')
+      .subscribe(data => {
+        console.log(data);
+      })
+
     const dialogRef = this.dialog.open(SuccessDialogComponent, {
       position: {
         top: '20rem',
