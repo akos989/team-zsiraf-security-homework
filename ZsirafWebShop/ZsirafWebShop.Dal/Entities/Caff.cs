@@ -10,7 +10,7 @@
         public string CaffRef { get; set; }
 
         public virtual User Creator { get; set; }
-        public virtual ICollection<CaffToUser> Buyers { get; set; }
+        public virtual ICollection<User> Buyers { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }
