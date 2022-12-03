@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './view/login/login.component';
 import { SignupComponent } from './view/signup/signup.component';
-import {ListComponent} from "./view/list/list.component";
-import {CaffDetailComponent} from "./view/caff-detail/caff-detail.component";
+import { ListComponent } from './view/list/list.component';
+import { CaffDetailComponent } from './view/caff-detail/caff-detail.component';
 import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
 
 const appRoutes: Routes = [

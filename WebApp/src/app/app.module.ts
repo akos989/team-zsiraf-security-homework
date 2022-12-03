@@ -16,7 +16,6 @@ import {MatCardModule} from "@angular/material/card";
 import { CaffDetailComponent } from './view/caff-detail/caff-detail.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
-import { NavigationComponent } from './view/navigation/navigation.component';
 import { ErrorDialogComponent } from './dialog/error-dialog/error-dialog.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
@@ -38,7 +37,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SuccessDialogComponent,
     ListComponent,
     CaffDetailComponent,
-    NavigationComponent
   ],
   imports: [
     BrowserModule,
