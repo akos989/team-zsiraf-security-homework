@@ -63,9 +63,9 @@ export class AuthService {
 
   private navigateAfterLogin(data: LoginResponseDto) {
     if (data.role === 'Admin') {
-      this.router.navigate(['/edit-caff']);
+      this.router.navigate(['/admin']);
     }
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/client']);
   }
 
   private saveAuthData(token: string) {

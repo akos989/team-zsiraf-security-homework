@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../service/authentication.service';
 
 @Component({
   selector: 'app-admin-navigation-bar',
   templateUrl: './admin-navigation-bar.component.html',
   styleUrls: ['./admin-navigation-bar.component.scss']
 })
-export class AdminNavigationBarComponent implements OnInit {
+export class AdminNavigationBarComponent {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
+  async onLogoutButtonClick() {
+    await this.authService.logout();
   }
 
 }

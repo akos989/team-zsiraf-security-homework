@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../service/authentication.service';
 
 @Component({
   selector: 'app-client-navigation-bar',
@@ -7,6 +8,9 @@ import {Component} from '@angular/core';
 })
 export class ClientNavigationBarComponent {
 
-  constructor() {
+  constructor(private authService: AuthService) { }
+
+  async onLogoutButtonClick() {
+    await this.authService.logout();
   }
 }
