@@ -16,6 +16,7 @@ import {ModifyCaffDto} from "../../model/modify-caff-dto";
 })
 export class EditCaffComponent implements OnInit {
   mode = 'create';
+  title = 'Modify your CAFF file';
   caff: Caff;
   files: File[] = [];
 
@@ -39,6 +40,8 @@ export class EditCaffComponent implements OnInit {
         }
       } else {
         this.mode = 'create';
+
+        this.title = 'Upload a new CAFF file';
       }
     });
   }
