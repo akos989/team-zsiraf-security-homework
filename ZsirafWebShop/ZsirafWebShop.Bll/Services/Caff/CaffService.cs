@@ -175,5 +175,21 @@ namespace ZsirafWebShop.Bll.Services.Caff
 
             return mapper.Map<CaffDto>(entity);
         }
+
+        public async Task<string> DownloadFileAsync(int id)
+        {
+            var entity = await dbContext.Caffs
+                .Include(c => c.Buyers)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (entity.Buyers.Any(b => b.Id == int.Parse(UserId)))
+            {
+                return entity.CaffRef;
+            }
+            else
+            {
+                throw new HttpException(401, "User not allowed");
+            }
+        }
     }
 }
