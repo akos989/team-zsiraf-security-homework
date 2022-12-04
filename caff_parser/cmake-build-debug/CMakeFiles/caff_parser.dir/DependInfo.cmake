@@ -1,16 +1,14 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/team-zsiraf-security-homework/caff_parser/main.cpp" "C:/Users/Attila/Desktop/egyetem cuccok/9. felev/szam_gep_bizt/caff_parser/team-zsiraf-security-homework/caff_parser/cmake-build-debug/CMakeFiles/caff_parser.dir/main.cpp.obj"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../output_generation"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Programs/SecurityHW/team-zsiraf-security-homework/caff_parser/main.cpp" "CMakeFiles/caff_parser.dir/main.cpp.obj" "gcc" "CMakeFiles/caff_parser.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links.

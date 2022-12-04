@@ -1,3 +1,3 @@
-"C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\caff_parser.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\caff_parser.dir/objects.a @CMakeFiles\caff_parser.dir\objects1.rsp
-C:\MinGW\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\caff_parser.dir/objects.a -Wl,--no-whole-archive  -o caff_parser.exe -Wl,--out-implib,libcaff_parser.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\caff_parser.dir\linklibs.rsp
+"C:\Program Files\JetBrains\CLion 2022.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\caff_parser.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\ar.exe qc CMakeFiles\caff_parser.dir/objects.a @CMakeFiles\caff_parser.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE -g -static -Wl,--whole-archive CMakeFiles\caff_parser.dir/objects.a -Wl,--no-whole-archive -o caff_parser.exe -Wl,--out-implib,libcaff_parser.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\caff_parser.dir\linklibs.rsp
