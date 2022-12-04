@@ -18,4 +18,23 @@ div.container {
   mat-card:hover {
     background-color: var(--element-background-80);
   }
+
+  div.no-caff {
+    left: auto;
+    right: auto;
+    width: 30rem;
+    height: 5rem;
+    border: solid 2px var(--element-text-color);
+    border-radius: 10px;
+    background-color: var(--element-background-35);
+    color: var(--element-text-color);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    span {
+      width: 100%;
+      text-align: center;
+      font-size: large;
+    }
+  }
 }

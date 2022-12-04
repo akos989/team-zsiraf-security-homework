@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { LoginRequestDto } from '../model/login-request-dto';
-import { LoginResponseDto } from '../model/login-response-dto';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
+import {LoginRequestDto} from '../model/login-request-dto';
+import {LoginResponseDto} from '../model/login-response-dto';
 import {SignupRequestDto} from "../model/signup-request-dto";
 import {SignupResponseDto} from "../model/signup-response-dto";
 

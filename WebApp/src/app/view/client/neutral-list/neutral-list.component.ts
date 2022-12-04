@@ -13,7 +13,7 @@ export class NeutralListComponent {
   caffList: Caff[] = [];
 
   constructor(private caffService: CaffService, private router: Router) {
-    this.fetchCaffList()
+    this.fetchCaffList();
   }
 
   private fetchCaffList() {
