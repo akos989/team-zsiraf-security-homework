@@ -48,13 +48,17 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  signup(email: string, username: string, password: string) {
+  signup(email: string, username: string, password: string): boolean {
     const signupRequestDto: SignupRequestDto = { email: email, password: password, username: username };
+    let success = false;
 
     this.http
       .post<{ data: SignupResponseDto }>(BACKEND_URL + '/register', signupRequestDto)
       .subscribe(response => {
+        success = true;
       });
+
+    return success;
   }
 
   private navigateAfterLogin(data: LoginResponseDto) {
