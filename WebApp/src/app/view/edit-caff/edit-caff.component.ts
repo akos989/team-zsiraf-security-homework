@@ -64,13 +64,13 @@ export class EditCaffComponent implements OnInit {
   }
 
   createCaffFile() {
-    const createCaffDto: CreateCaffDto = {
-      title: this.nameFormControl.value,
-      description: this.descriptionFormControl.value,
-      price: this.priceFormControl.value,
-    }
+    const formData = new FormData();
+    formData.append('Title', this.nameFormControl.value);
+    formData.append('Description', this.descriptionFormControl.value);
+    formData.append('Price', this.priceFormControl.value);
+    formData.append('CaffFile', this.files[0]);
 
-    this.caffService.saveCaff(createCaffDto)
+    this.caffService.saveCaff(formData)
       .subscribe(response => {
         this.openSuccessDialog();
       });

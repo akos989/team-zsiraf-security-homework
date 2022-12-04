@@ -11,6 +11,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {CreateCaffDto} from "../model/create-caff-dto";
 import {ModifyCaffDto} from "../model/modify-caff-dto";
+import {Form} from "@angular/forms";
 
 const CAFF_BACKEND_URL = environment.apiUrl + '/Caff';
 const COMMENT_BACKEND_URL = environment.apiUrl + '/Comment';
@@ -101,7 +102,7 @@ export class CaffService {
     return of(null);
   }
 
-  saveCaff(createCaffDto: CreateCaffDto) {
+  saveCaff(createCaffDto: FormData) {
     return this.http
       .post<Caff>(CAFF_BACKEND_URL, createCaffDto)
       .pipe(tap(newCaff => {
