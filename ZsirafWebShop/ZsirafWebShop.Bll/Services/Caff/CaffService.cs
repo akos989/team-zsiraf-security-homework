@@ -114,14 +114,14 @@ namespace ZsirafWebShop.Bll.Services.Caff
             return mapper.Map<List<CaffDto>>(entity.PurchasedCaffs);
         }
 
-        public async Task<CaffGifDto> GetSingleAsync(int id)
+        public async Task<CaffDto> GetSingleAsync(int id)
         {
             var entity = await dbContext.Caffs
                .Include(a => a.Creator)
                .Include(a => a.Buyers)
                .FirstOrDefaultAsync(a => a.Id == id);
 
-            return mapper.Map<CaffGifDto>(entity);
+            return mapper.Map<CaffDto>(entity);
         }
 
         public async Task PurchaseAsync(int id)

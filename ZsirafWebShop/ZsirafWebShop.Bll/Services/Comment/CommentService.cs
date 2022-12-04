@@ -38,6 +38,9 @@ namespace ZsirafWebShop.Bll.Services.Comment
 
                 await dbContext.Comments.AddAsync(entity);
                 await dbContext.SaveChangesAsync();
+                dbContext.Entry(entity)
+                    .Reference(e => e.User)
+                    .Load();
 
                 var dto = mapper.Map<CommentDto>(entity);
 
