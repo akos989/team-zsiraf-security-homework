@@ -48,7 +48,7 @@ namespace ZsirafWebShop.Bll.Services.Auth
 
                 var token = jwtService.CreateUserAuthToken(authClaims);
 
-                return new LoginResponse { Token = token, Username = user.UserName, UserId = user.Id };
+                return new LoginResponse { Token = token, Username = user.UserName, UserId = user.Id, Role = roles.First() };
             }
             throw new ArgumentException($"Username or password not correct.");
         }

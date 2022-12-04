@@ -5,6 +5,7 @@ import { first } from 'rxjs';
 import { Router } from '@angular/router';
 import { SuccessDialogComponent } from '../../../dialog/success-dialog/success-dialog.component';
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../../service/authentication.service";
 
 @Component({
   selector: 'app-signup',
@@ -18,32 +19,41 @@ export class SignupComponent implements OnInit {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
+  usernameFormControl = new FormControl('', [Validators.required]);
   confirmationPasswordFormControl = new FormControl('', [Validators.required, this.checkPasswords]);
 
   constructor(private dialog: MatDialog,
               private router: Router,
-              private http: HttpClient) { }
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  onSignupButtonClick() {
-    this.http.get<any>('https://api.openweathermap.org/data/2.5/weather?lat=47.497913&lon=19.040236&appid=107eca7031d101001ab347376dbe2747')
-      .subscribe(data => {
-        console.log(data);
-      })
+  async onSignupButtonClick() {
+    if (this.emailFormControl.valid && this.passwordFormControl.valid && this.usernameFormControl.valid && this.confirmationPasswordFormControl.valid) {
+      await this.authService.signup(this.emailFormControl.value, this.usernameFormControl.value, this.passwordFormControl.value);
 
-    const dialogRef = this.dialog.open(SuccessDialogComponent, {
-      position: {
-        top: '20rem',
-      },
-      data: {
-        text: 'You have successfully signed up!',
-      },
-    });
+      const dialogRef = this.dialog.open(SuccessDialogComponent, {
+        position: {
+          top: '20rem',
+        },
+        data: {
+          text: 'You have successfully signed up!',
+        },
+      });
 
-    dialogRef.afterClosed().pipe(first()).subscribe(() => {
-      this.router.navigate(['/login']);
-    });
+      dialogRef.afterClosed().pipe(first()).subscribe(() => {
+        this.router.navigate(['/login']);
+      });
+    } else {
+      this.emailFormControl.markAsDirty();
+      this.emailFormControl.markAsTouched();
+      this.passwordFormControl.markAsDirty();
+      this.passwordFormControl.markAsTouched();
+      this.usernameFormControl.markAsDirty();
+      this.usernameFormControl.markAsTouched();
+      this.confirmationPasswordFormControl.markAsDirty();
+      this.confirmationPasswordFormControl.markAsTouched();
+    }
   }
 }

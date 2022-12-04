@@ -15,14 +15,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
 import {ClientNavigationBarComponent} from './component/client-navigation-bar/client-navigation-bar.component';
-import {ErrorDialogComponent} from './dialog/error-dialog/error-dialog.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ErrorInterceptor} from './interceptor/error.interceptor';
-import {AuthInterceptor} from './interceptor/auth.interceptor';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoadingComponent} from './view/shared/loading/loading.component';
-import {EditCaffComponent} from './view/edit-caff/edit-caff.component';
-import {NgxDropzoneModule} from 'ngx-dropzone';
 import {NeutralListComponent} from './view/client/neutral-list/neutral-list.component';
 import {PurchasedListComponent} from './view/client/purchased-list/purchased-list.component';
 import {UploadedListComponent} from './view/client/uploaded-list/uploaded-list.component';
@@ -35,6 +28,13 @@ import { AdminCaffDetailComponent } from './view/admin/admin-caff-detail/admin-c
 import { ClientCaffDetailComponent } from './view/client/client-caff-detail/client-caff-detail.component';
 import { CommentListComponent } from './component/comment-list/comment-list.component';
 import { AdminNavigationBarComponent } from './component/admin-navigation-bar/admin-navigation-bar.component';
+import { ErrorDialogComponent } from './dialog/error-dialog/error-dialog.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import { AdminNavigationBarComponent } from './component/admin-navigation-bar/ad
     AdminCaffDetailComponent,
     ClientCaffDetailComponent,
     CommentListComponent,
-    AdminNavigationBarComponent
+    AdminNavigationBarComponent,
+    LoadingComponent
   ],
     imports: [
         BrowserModule,

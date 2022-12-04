@@ -34,7 +34,7 @@ namespace ZsirafWebShop.Dal.Migrations
 
                     b.HasIndex("PurchasedCaffsId");
 
-                    b.ToTable("CaffUser");
+                    b.ToTable("CaffUser", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -223,7 +223,7 @@ namespace ZsirafWebShop.Dal.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Caffs");
+                    b.ToTable("Caffs", (string)null);
                 });
 
             modelBuilder.Entity("ZsirafWebShop.Dal.Entities.Comment", b =>
@@ -250,7 +250,7 @@ namespace ZsirafWebShop.Dal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("ZsirafWebShop.Dal.Entities.User", b =>
