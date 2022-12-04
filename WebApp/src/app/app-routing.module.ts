@@ -1,23 +1,24 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './view/shared/login/login.component';
-import {SignupComponent} from './view/shared/signup/signup.component';
-import {EditCaffComponent} from './view/edit-caff/edit-caff.component';
-import {NeutralListComponent} from "./view/client/neutral-list/neutral-list.component";
-import {UploadedListComponent} from "./view/client/uploaded-list/uploaded-list.component";
-import {PurchasedListComponent} from "./view/client/purchased-list/purchased-list.component";
-import {ClientBaseComponent} from "./view/client/client-base/client-base.component";
-import {AdminBaseComponent} from "./view/admin/admin-base/admin-base.component";
-import {AdminListComponent} from "./view/admin/admin-list/admin-list.component";
-import {AdminCaffDetailComponent} from "./view/admin/admin-caff-detail/admin-caff-detail.component";
-import {ClientCaffDetailComponent} from "./view/client/client-caff-detail/client-caff-detail.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './view/shared/login/login.component';
+import { SignupComponent } from './view/shared/signup/signup.component';
+import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
+import { NeutralListComponent } from './view/client/neutral-list/neutral-list.component';
+import { UploadedListComponent } from './view/client/uploaded-list/uploaded-list.component';
+import { PurchasedListComponent } from './view/client/purchased-list/purchased-list.component';
+import { ClientBaseComponent } from './view/client/client-base/client-base.component';
+import { AdminBaseComponent } from './view/admin/admin-base/admin-base.component';
+import { AdminListComponent } from './view/admin/admin-list/admin-list.component';
+import { AdminCaffDetailComponent } from './view/admin/admin-caff-detail/admin-caff-detail.component';
+import { ClientCaffDetailComponent } from './view/client/client-caff-detail/client-caff-detail.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   // client page routes
-  { path: 'client', component: ClientBaseComponent,
+  { path: 'client', component: ClientBaseComponent, canActivate: [AuthGuard],
     children:[
       { path: '', component: NeutralListComponent },
       { path: 'uploaded', component: UploadedListComponent },
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
     ]
   },
   // admin page routes
-  { path: 'admin', component: AdminBaseComponent,
+  { path: 'admin', component: AdminBaseComponent, canActivate: [AuthGuard],
     children:[
       { path: '', component: AdminListComponent },
       { path: ':id/caff-detail', component: AdminCaffDetailComponent },
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}
 
