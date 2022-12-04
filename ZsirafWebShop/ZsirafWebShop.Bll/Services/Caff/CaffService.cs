@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using ZsirafWebShop.Bll.Exceptions;
+using ZsirafWebShop.Bll.Services.Files;
 using ZsirafWebShop.Bll.Services.Payment;
 using ZsirafWebShop.Dal.Context;
 using ZsirafWebShop.Transfer.Models.Caffs;
@@ -15,31 +16,37 @@ namespace ZsirafWebShop.Bll.Services.Caff
         private readonly WebShopDbContext dbContext;
         private readonly IMapper mapper;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IFileService fileService;
         private readonly IPaymentService paymentService;
         private readonly IAuthorizationService authorizationService;
 
         private string UserId => httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public CaffService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IPaymentService paymentService, IAuthorizationService authorizationService)
+        public CaffService(WebShopDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IPaymentService paymentService, IAuthorizationService authorizationService, IFileService fileService)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.httpContextAccessor = httpContextAccessor;
             this.paymentService = paymentService;
             this.authorizationService = authorizationService;
+            this.fileService = fileService;
         }
 
         public async Task<CaffDto> CreateAsync(CreateCaffDto caff)
         {
             if (int.TryParse(UserId, out var userId))
             {
+                var caffFile = await fileService.UploadFileAsync(caff.CaffFile);
+
                 var entity = new Dal.Entities.Caff
                 {
                     CreatorId = userId,
                     Title = caff.Title,
                     Description = caff.Description,
                     Price = caff.Price,
-                    // CaffRef = caff.CaffRef TODO
+                    CaffRef = caffFile.CaffPath,
+                    GifRef = caffFile.GifPath,
+                    OriginalFileName = caffFile.OriginalFileName
                 };
 
                 await dbContext.Caffs.AddAsync(entity);
@@ -107,14 +114,14 @@ namespace ZsirafWebShop.Bll.Services.Caff
             return mapper.Map<List<CaffDto>>(entity.PurchasedCaffs);
         }
 
-        public async Task<CaffDto> GetSingleAsync(int id)
+        public async Task<CaffGifDto> GetSingleAsync(int id)
         {
             var entity = await dbContext.Caffs
                .Include(a => a.Creator)
                .Include(a => a.Buyers)
                .FirstOrDefaultAsync(a => a.Id == id);
 
-            return mapper.Map<CaffDto>(entity);
+            return mapper.Map<CaffGifDto>(entity);
         }
 
         public async Task PurchaseAsync(int id)

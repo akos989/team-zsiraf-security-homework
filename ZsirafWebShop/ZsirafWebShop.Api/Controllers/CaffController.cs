@@ -22,7 +22,7 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetAllAsync();
 
         [HttpGet("{id}")]
-        public async Task<CaffDto> GetSingleAsync(int id)
+        public async Task<CaffGifDto> GetSingleAsync(int id)
             => await caffService.GetSingleAsync(id);
 
         [HttpGet("created")]
@@ -34,7 +34,7 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetAllPurchasedAsync();
 
         [HttpPost]
-        public async Task<CaffDto> CreateAsync([FromBody] CreateCaffDto caff)
+        public async Task<CaffDto> CreateAsync([FromForm] CreateCaffDto caff)
             => await caffService.CreateAsync(caff);
 
         [HttpPut]
