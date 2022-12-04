@@ -17,11 +17,26 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getToken() {
+    this.updateAuthState();
+
     return this.token;
   }
 
   getIsAuth() {
+    this.updateAuthState();
+
     return this.isAuthenticated;
+  }
+
+  updateAuthState() {
+    const data = this.getAuthData();
+
+    if (data?.token) {
+      this.token = data.token;
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
+    }
   }
 
   login(username: string, password: string) {
