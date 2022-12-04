@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZsirafWebShop.Bll.Services.Caff;
 using ZsirafWebShop.Transfer.Models.Caffs;
 
@@ -22,8 +23,20 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetAllAsync();
 
         [HttpGet("{id}")]
-        public async Task<CaffDto> GetSingleAsync(int id)
+        public async Task<CaffGifDto> GetSingleAsync(int id)
             => await caffService.GetSingleAsync(id);
+
+        [HttpGet("download/{id}")]
+        public async Task<ActionResult> DownloadFileAsync(int id)
+        {
+            var path = await caffService.DownloadFileAsync(id);
+
+            if(System.IO.File.Exists(path))
+            {
+                return File(System.IO.File.OpenRead(path), "application/octet-stream", Path.GetFileName(path));
+            }
+            return NotFound();
+        }
 
         [HttpGet("created")]
         public async Task<IEnumerable<CaffDto>> GetAllCreatedAsync()
@@ -34,7 +47,7 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetAllPurchasedAsync();
 
         [HttpPost]
-        public async Task<CaffDto> CreateAsync([FromBody] CreateCaffDto caff)
+        public async Task<CaffDto> CreateAsync([FromForm] CreateCaffDto caff)
             => await caffService.CreateAsync(caff);
 
         [HttpPut]

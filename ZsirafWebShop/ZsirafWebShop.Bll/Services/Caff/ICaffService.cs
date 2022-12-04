@@ -6,7 +6,7 @@ namespace ZsirafWebShop.Bll.Services.Caff
     {
         public Task<IEnumerable<CaffDto>> GetAllAsync();
 
-        public Task<CaffDto> GetSingleAsync(int id);
+        public Task<CaffGifDto> GetSingleAsync(int id);
 
         public Task<IEnumerable<CaffDto>> GetAllCreatedAsync();
 
@@ -19,5 +19,6 @@ namespace ZsirafWebShop.Bll.Services.Caff
         public Task DeleteByIdAsync(int id);
 
         public Task PurchaseAsync(int id);
+        public Task<string> DownloadFileAsync(int id);
     }
 }

@@ -10,6 +10,8 @@ using ZsirafWebShop.Api.Middlewares;
 using ZsirafWebShop.Bll.Mapping;
 using ZsirafWebShop.Bll.Services.Auth;
 using ZsirafWebShop.Bll.Services.Caff;
+using ZsirafWebShop.Bll.Services.Comment;
+using ZsirafWebShop.Bll.Services.Files;
 using ZsirafWebShop.Bll.Services.Jwt;
 using ZsirafWebShop.Bll.Services.Payment;
 using ZsirafWebShop.Dal.Context;
@@ -114,6 +116,8 @@ namespace ZsirafWebShop.Api
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICaffService, CaffService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IFileService, FileService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
