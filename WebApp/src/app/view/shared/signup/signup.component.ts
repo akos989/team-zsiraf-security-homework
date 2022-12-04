@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { first } from 'rxjs';
-import { Router } from '@angular/router';
-import { SuccessDialogComponent } from '../../../dialog/success-dialog/success-dialog.component';
-import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../../service/authentication.service";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {first} from 'rxjs';
+import {Router} from '@angular/router';
+import {SuccessDialogComponent} from '../../../dialog/success-dialog/success-dialog.component';
+import {AuthService} from "../../../service/authentication.service";
 
 @Component({
   selector: 'app-signup',
