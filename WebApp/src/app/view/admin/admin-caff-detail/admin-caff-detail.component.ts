@@ -19,10 +19,8 @@ export class AdminCaffDetailComponent {
   private getCaffFromRouteParam() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const foundCaff = this.caffService.getCaffById(id);
-      if (foundCaff) {
-        this.caff = foundCaff;
-      }
+      this.caffService.fetchCaffById(id)
+        .subscribe(caff => this.caff = caff);
     }
   }
 }

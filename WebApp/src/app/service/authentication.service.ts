@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { LoginRequestDto } from '../model/login-request-dto';
-import { LoginResponseDto } from '../model/login-response-dto';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
+import {LoginRequestDto} from '../model/login-request-dto';
+import {LoginResponseDto} from '../model/login-response-dto';
 import {SignupRequestDto} from "../model/signup-request-dto";
 import {SignupResponseDto} from "../model/signup-response-dto";
 
@@ -17,11 +17,26 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getToken() {
+    this.updateAuthState();
+
     return this.token;
   }
 
   getIsAuth() {
+    this.updateAuthState();
+
     return this.isAuthenticated;
+  }
+
+  updateAuthState() {
+    const data = this.getAuthData();
+
+    if (data?.token) {
+      this.token = data.token;
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
+    }
   }
 
   login(username: string, password: string) {
@@ -51,17 +66,14 @@ export class AuthService {
   signup(email: string, username: string, password: string) {
     const signupRequestDto: SignupRequestDto = { email: email, password: password, username: username };
 
-    this.http
-      .post<{ data: SignupResponseDto }>(BACKEND_URL + '/register', signupRequestDto)
-      .subscribe(response => {
-      });
+    return this.http.post<{ data: SignupResponseDto }>(BACKEND_URL + '/register', signupRequestDto);
   }
 
   private navigateAfterLogin(data: LoginResponseDto) {
     if (data.role === 'Admin') {
-      this.router.navigate(['/edit-caff']);
+      this.router.navigate(['/admin']);
     }
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/client']);
   }
 
   private saveAuthData(token: string) {

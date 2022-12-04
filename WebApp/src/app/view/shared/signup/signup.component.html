@@ -39,11 +39,14 @@
         Confirmation password is <strong>required</strong>
       </mat-error>
       <mat-error *ngIf="confirmationPasswordFormControl.hasError('notSame')">
-        Passwords don't<strong>match</strong>
+        Passwords don't <strong>match</strong>
       </mat-error>
     </mat-form-field>
 
     <!--submit button-->
-    <button type="button" class="mt-5 mb-5" mat-raised-button color="primary" (click)="onSignupButtonClick()">Sign up</button>
+    <button type="button" class="mt-5" mat-raised-button color="primary" (click)="onSignupButtonClick()">Sign up</button>
+
+    <!--sign up link-->
+    <a class="sign-up-link mt-2 mb-5" routerLink="/login">Log in</a>
   </form>
 </div>
