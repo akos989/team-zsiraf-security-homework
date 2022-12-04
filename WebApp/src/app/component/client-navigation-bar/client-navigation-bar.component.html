@@ -7,7 +7,7 @@
     <div class="navbar-nav">
       <a [routerLink]="['/client/uploaded']" class="nav-item nav-link">Uploaded</a>
       <a [routerLink]="['/client/purchased']" class="nav-item nav-link">Purchased</a>
-      <a class="nav-item nav-link">Logout</a>
+      <a class="nav-item nav-link" (click)="onLogoutButtonClick()">Logout</a>
     </div>
   </div>
 </nav>

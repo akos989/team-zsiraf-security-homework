@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthService} from "../../../service/authentication.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +21,14 @@ export class LoginComponent implements OnInit {
     if (this.usernameFormControl.valid && this.passwordFormControl.valid) {
       this.authService.login(this.usernameFormControl.value, this.passwordFormControl.value);
     } else {
-      this.usernameFormControl.markAsDirty();
-      this.usernameFormControl.markAsTouched();
-      this.passwordFormControl.markAsDirty();
-      this.passwordFormControl.markAsTouched();
+      this.markAllFormControlsDirtyAndTouched();
     }
+  }
+
+  markAllFormControlsDirtyAndTouched() {
+    this.usernameFormControl.markAsDirty();
+    this.usernameFormControl.markAsTouched();
+    this.passwordFormControl.markAsDirty();
+    this.passwordFormControl.markAsTouched();
   }
 }

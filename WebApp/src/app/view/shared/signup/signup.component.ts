@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {first} from 'rxjs';
-import {Router} from '@angular/router';
-import {SuccessDialogComponent} from '../../../dialog/success-dialog/success-dialog.component';
-import {AuthService} from "../../../service/authentication.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { first } from 'rxjs';
+import { Router } from '@angular/router';
+import { SuccessDialogComponent } from '../../../dialog/success-dialog/success-dialog.component';
+import { AuthService } from '../../../service/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -30,29 +30,39 @@ export class SignupComponent implements OnInit {
 
   async onSignupButtonClick() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid && this.usernameFormControl.valid && this.confirmationPasswordFormControl.valid) {
-      await this.authService.signup(this.emailFormControl.value, this.usernameFormControl.value, this.passwordFormControl.value);
+      const success = await this.authService.signup(this.emailFormControl.value, this.usernameFormControl.value, this.passwordFormControl.value);
 
-      const dialogRef = this.dialog.open(SuccessDialogComponent, {
-        position: {
-          top: '20rem',
-        },
-        data: {
-          text: 'You have successfully signed up!',
-        },
-      });
-
-      dialogRef.afterClosed().pipe(first()).subscribe(() => {
-        this.router.navigate(['/login']);
-      });
+      if (success) {
+        this.openSuccessDialog();
+      }
     } else {
-      this.emailFormControl.markAsDirty();
-      this.emailFormControl.markAsTouched();
-      this.passwordFormControl.markAsDirty();
-      this.passwordFormControl.markAsTouched();
-      this.usernameFormControl.markAsDirty();
-      this.usernameFormControl.markAsTouched();
-      this.confirmationPasswordFormControl.markAsDirty();
-      this.confirmationPasswordFormControl.markAsTouched();
+      this.markAllFormControlsDirtyAndTouched();
     }
+  }
+
+  openSuccessDialog() {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      position: {
+        top: '20rem',
+      },
+      data: {
+        text: 'You have successfully signed up!',
+      },
+    });
+
+    dialogRef.afterClosed().pipe(first()).subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
+
+  markAllFormControlsDirtyAndTouched() {
+    this.emailFormControl.markAsDirty();
+    this.emailFormControl.markAsTouched();
+    this.passwordFormControl.markAsDirty();
+    this.passwordFormControl.markAsTouched();
+    this.usernameFormControl.markAsDirty();
+    this.usernameFormControl.markAsTouched();
+    this.confirmationPasswordFormControl.markAsDirty();
+    this.confirmationPasswordFormControl.markAsTouched();
   }
 }
