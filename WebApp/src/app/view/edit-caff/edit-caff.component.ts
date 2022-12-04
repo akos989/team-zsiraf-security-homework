@@ -107,7 +107,7 @@ export class EditCaffComponent implements OnInit {
 
     dialogRef.afterClosed().pipe(first()).subscribe(() => {
       if (this.mode === 'create') {
-        this.router.navigate(['/client']);
+        this.router.navigate(['/client/uploaded']);
       } else {
         this.router.navigate(['/admin']);
       }

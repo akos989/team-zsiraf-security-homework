@@ -103,12 +103,20 @@ export class CaffService {
 
   saveCaff(createCaffDto: CreateCaffDto) {
     return this.http
-      .post(CAFF_BACKEND_URL, createCaffDto);
+      .post<Caff>(CAFF_BACKEND_URL, createCaffDto)
+      .pipe(tap(newCaff => {
+        this.allCaffs.push(newCaff);
+      }))
   }
 
   modifyCaff(modifyCaffDto: ModifyCaffDto) {
     return this.http
-      .put(CAFF_BACKEND_URL, modifyCaffDto);
+      .put<Caff>(CAFF_BACKEND_URL, modifyCaffDto)
+      .pipe(tap(newCaff => {
+        const index = this.allCaffs.findIndex(caff => caff.id === newCaff.id);
+        this.allCaffs.splice(index, 1);
+        this.allCaffs.push(newCaff);
+      }))
   }
 
   private saveDistinctCaffs(newCaffs: Caff[]) {
