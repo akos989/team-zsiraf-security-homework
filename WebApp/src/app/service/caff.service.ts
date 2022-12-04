@@ -10,7 +10,8 @@ import {Caff} from "../model/caff.model";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
-const BACKEND_URL = environment.apiUrl + '/Caff';
+const CAFF_BACKEND_URL = environment.apiUrl + '/Caff';
+const COMMENT_BACKEND_URL = environment.apiUrl + '/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class CaffService {
 
   fetchAllCaff() {
     return this.http
-      .get<Caff[]>(`${BACKEND_URL}`)
+      .get<Caff[]>(`${CAFF_BACKEND_URL}`)
       .pipe(
         tap(caffs => this.saveDistinctCaffs(caffs))
       );
@@ -32,7 +33,7 @@ export class CaffService {
 
   fetchUploadedCaff() {
     return this.http
-      .get<Caff[]>(`${BACKEND_URL}/created`)
+      .get<Caff[]>(`${CAFF_BACKEND_URL}/created`)
       .pipe(
         tap(caffs => this.saveDistinctCaffs(caffs))
       );
@@ -46,7 +47,7 @@ export class CaffService {
 
   fetchPurchasedCaff() {
     return this.http
-      .get<Caff[]>(`${BACKEND_URL}/purchased`)
+      .get<Caff[]>(`${CAFF_BACKEND_URL}/purchased`)
       .pipe(
         tap(caffs => this.saveDistinctCaffs(caffs))
       );
@@ -64,18 +65,38 @@ export class CaffService {
     }
 
     return this.http
-      .get<Caff>(`${BACKEND_URL}/${id}`);
+      .get<Caff>(`${CAFF_BACKEND_URL}/${id}`);
+  }
+
+  purchaseCaff(caff: Caff ) {
+    return this.http
+      .post(`${CAFF_BACKEND_URL}/${caff.id}`, {});
   }
 
   deleteCaff(caff: Caff) {
     return this.http
-      .delete(`${BACKEND_URL}/${caff.id}`)
+      .delete(`${CAFF_BACKEND_URL}/${caff.id}`)
       .pipe(
         tap(_ => {
           const deletedIndex = this.allCaffs.indexOf(caff);
           this.allCaffs.slice(deletedIndex, 1);
         })
       )
+  }
+
+  addCommentToCaff(caff: Caff, commentText: string) {
+    const body = {
+      text: commentText,
+      caffId: caff.id
+    };
+
+    return this.http
+      .post(`${CAFF_BACKEND_URL}/${caff.id}`, body);
+  }
+
+  downloadCaff(caff: Caff) {
+    // Todo: implement downloadCaff function
+    return of(null);
   }
 
   private saveDistinctCaffs(newCaffs: Caff[]) {

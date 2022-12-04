@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CaffUsageType} from "../../../model/caff-usage-type.enum";
 import {Caff} from "../../../model/caff.model";
 import {CaffService} from "../../../service/caff.service";
@@ -15,7 +15,11 @@ export class ClientCaffDetailComponent {
   caffUsageType: CaffUsageType;
   allCaffUsageTypes = CaffUsageType;
 
-  constructor(private route: ActivatedRoute, private caffService: CaffService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private caffService: CaffService
+  ) {
     this.getCaffUsageTypeFromRoute();
     this.getCaffFromRouteParam();
   }
@@ -37,5 +41,30 @@ export class ClientCaffDetailComponent {
       this.caffService.fetchCaffById(id)
         .subscribe(caff => this.caff = caff);
     }
+  }
+
+  onPurchase() {
+    this.caffService.purchaseCaff(this.caff)
+      .subscribe(_ => {
+        this.router.navigate([`/client/${this.caff.id}/caff-detail`], { fragment: CaffUsageType.purchased });
+      });
+  }
+
+  onDelete() {
+    this.caffService.deleteCaff(this.caff)
+      .subscribe(_ => {
+        this.router.navigate([`/client/uploaded-list`]);
+      });
+  }
+
+  onDownload() {
+    this.caffService.deleteCaff(this.caff)
+      .subscribe(_ => {
+        // Todo: download caff to users computer
+      });
+  }
+
+  onAddComment() {
+
   }
 }
