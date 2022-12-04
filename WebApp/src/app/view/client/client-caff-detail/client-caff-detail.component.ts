@@ -33,13 +33,9 @@ export class ClientCaffDetailComponent {
 
   private getCaffFromRouteParam() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id)
     if (id) {
-      const foundCaff = this.caffService.getCaffById(id);
-    console.log(foundCaff)
-      if (foundCaff) {
-        this.caff = foundCaff;
-      }
+      this.caffService.fetchCaffById(id)
+        .subscribe(caff => this.caff = caff);
     }
   }
 }
