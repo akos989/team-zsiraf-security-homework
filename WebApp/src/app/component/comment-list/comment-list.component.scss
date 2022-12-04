@@ -1,0 +1,43 @@
+mat-expansion-panel {
+  mat-panel-title {
+    color: var(--element-text-color);
+  }
+  color: black;
+  background-color: var(--element-background-20);
+
+  .comment {
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--element-background-35);
+    border-radius: 15px;
+    border: solid 1px var(--element-background-80);
+  }
+
+  div.margin {
+    margin-top: 10px;
+  }
+
+  form {
+    mat-form-field {
+      width: 100%;
+      mat-label {
+        color: var(--element-text-color);
+      }
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+::ng-deep mat-expansion-panel-header > .mat-expansion-indicator:after {
+  color: var(--element-text-color);
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: var(--element-text-color) !important;
+}
+
+::ng-deep .mat-form-field-required-marker {
+  color: var(--element-text-color);
+}

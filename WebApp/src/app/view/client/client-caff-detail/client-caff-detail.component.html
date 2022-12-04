@@ -1,0 +1,8 @@
+<app-caff-detail [caff]="caff">
+  <button *ngIf="caffUsageType == allCaffUsageTypes.neutral" class="btn btn-success">Purchase ({{ caff.price }}$)</button>
+  <button *ngIf="caffUsageType == allCaffUsageTypes.purchased || caffUsageType == allCaffUsageTypes.uploaded" class="btn btn-primary">Download</button>
+  <button *ngIf="caffUsageType == allCaffUsageTypes.uploaded" class="btn btn-danger">Delete</button>
+</app-caff-detail>
+<div class="mb-5">
+  <app-comment-list [comments]="caff.comments"></app-comment-list>
+</div>

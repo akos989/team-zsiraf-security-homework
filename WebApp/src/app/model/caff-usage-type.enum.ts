@@ -1,6 +1,5 @@
 export enum CaffUsageType {
-  admin,
-  neutral,
-  purchased,
-  uploaded
+  neutral = 'neutral',
+  purchased = 'purchased',
+  uploaded = 'uploaded'
 }
