@@ -212,6 +212,14 @@ namespace ZsirafWebShop.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("GifRef")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
 
@@ -325,11 +333,11 @@ namespace ZsirafWebShop.Dal.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03ab6c36-c900-4c57-ad42-eaff9a124851",
+                            ConcurrencyStamp = "7f1537e8-7143-4dca-97a7-7a8101a6f5ed",
                             Email = "admin@zsiraf.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGbd6c66ck0wPz84z4NU+0ObLf0HbHJewuA9U2OwHMTJRARKtnYWavkP94xL5Un9AA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPaU/q/zQ8OB9iiIVlgs7x6zt1Mra6Ripv+3aBP1rj6Lm5U4JelBfrq5BiVR12X7eg==",
                             PhoneNumber = "",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
