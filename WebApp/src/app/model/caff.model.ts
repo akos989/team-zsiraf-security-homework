@@ -5,6 +5,6 @@ export class Caff {
   title: string;
   price: number;
   description: string;
-  caffRef: string;
+  gifRef: string;
   comments: Comment[] = [];
 }

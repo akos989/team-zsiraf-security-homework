@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Comment} from "../../model/comment.model";
 import {NgForm} from "@angular/forms";
 
@@ -11,11 +11,24 @@ export class CommentListComponent {
   @Input() comments: Comment[];
   @Input() isAdmin = false;
 
+  @Output() onCommentAdded = new EventEmitter<string>();
+  @Output() onCommentDeleted = new EventEmitter<Comment>();
+
   @ViewChild('commentForm') commentForm: NgForm;
 
   constructor() { }
 
   onCommentSubmitted() {
-    //
+    console.log(this.commentForm)
+    const commentText = this.commentForm.form.controls['commentInput'].value;
+    console.log(commentText)
+    // if (commentText && commentText === '') {
+    console.log("asdfasdf")
+      this.onCommentAdded.emit(commentText);
+    // }
+  }
+
+  onCommentDeletePressed(comment: Comment) {
+    this.onCommentDeleted.emit(comment)
   }
 }
