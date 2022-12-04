@@ -1,0 +1,39 @@
+<mat-accordion>
+  <mat-expansion-panel [hideToggle]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>Comments</h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list *ngIf="comments.length > 0; else noComments">
+      <div *ngFor="let comment of comments">
+        <div class="row">
+          <div class="col-12 col-md-11">
+            <div class="row comment">
+              <div class="col-12 col-md-2"><strong>{{ comment.author }}:</strong></div>
+              <div class="col-12 col-md-10">{{ comment.commentString }}</div>
+            </div>
+          </div>
+          <div class="col-12 col-md-1 margin align-text-center">
+            <button *ngIf="isAdmin" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </mat-list>
+    <ng-template #noComments>
+      <div>No comments on this Caff</div>
+    </ng-template>
+    <form *ngIf="!isAdmin" (ngSubmit)="onCommentSubmitted()" #commentForm="ngForm">
+      <mat-form-field class="input mt-4">
+        <mat-label class="label">New comment</mat-label>
+        <textarea matInput name="commentInput" required ngModel #commentInput="ngModel"></textarea>
+        <mat-error *ngIf="commentInput.invalid">
+          Comment cannot be empty!
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button type="submit" class="btn btn-primary">Add comment</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

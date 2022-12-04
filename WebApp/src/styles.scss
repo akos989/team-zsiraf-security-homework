@@ -1,6 +1,21 @@
+@import "theme/colors.scss";
+@import "theme/variables.scss";
+
 html, body { height: 100%; }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import "theme/colors.scss";
-@import "theme/variables.scss";
+.align-text-center {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--element-background-50) !important;
+  color: var(--element-text-color) !important;
+  border-color: var(--element-background-50) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--element-background-80) !important;
+}
+
