@@ -30,11 +30,10 @@ export class SignupComponent implements OnInit {
 
   async onSignupButtonClick() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid && this.usernameFormControl.valid && this.confirmationPasswordFormControl.valid) {
-      const success = await this.authService.signup(this.emailFormControl.value, this.usernameFormControl.value, this.passwordFormControl.value);
-
-      if (success) {
-        this.openSuccessDialog();
-      }
+      this.authService.signup(this.emailFormControl.value, this.usernameFormControl.value, this.passwordFormControl.value)
+        .subscribe(response => {
+          this.openSuccessDialog();
+        });
     } else {
       this.markAllFormControlsDirtyAndTouched();
     }

@@ -10,6 +10,9 @@ import {Caff} from "../model/caff.model";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Comment} from "../model/comment.model";
+import {CreateCaffDto} from "../model/create-caff-dto";
+import {ModifyCaffDto} from "../model/modify-caff-dto";
+import {Form} from "@angular/forms";
 
 const CAFF_BACKEND_URL = environment.apiUrl + '/Caff';
 const COMMENT_BACKEND_URL = environment.apiUrl + '/Comment';
@@ -92,6 +95,24 @@ export class CaffService {
   deleteComment(comment: Comment) {
     return this.http
       .delete(`${COMMENT_BACKEND_URL}/${comment.id}`);
+  }
+
+  saveCaff(createCaffDto: FormData) {
+    return this.http
+      .post<Caff>(CAFF_BACKEND_URL, createCaffDto)
+      .pipe(tap(newCaff => {
+        this.allCaffs.push(newCaff);
+      }))
+  }
+
+  modifyCaff(modifyCaffDto: ModifyCaffDto) {
+    return this.http
+      .put<Caff>(CAFF_BACKEND_URL, modifyCaffDto)
+      .pipe(tap(newCaff => {
+        const index = this.allCaffs.findIndex(caff => caff.id === newCaff.id);
+        this.allCaffs.splice(index, 1);
+        this.allCaffs.push(newCaff);
+      }))
   }
 
   private saveDistinctCaffs(newCaffs: Caff[]) {

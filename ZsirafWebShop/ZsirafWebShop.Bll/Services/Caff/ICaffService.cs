@@ -19,5 +19,6 @@ namespace ZsirafWebShop.Bll.Services.Caff
         public Task DeleteByIdAsync(int id);
 
         public Task PurchaseAsync(int id);
+        public Task<string> DownloadFileAsync(int id);
     }
 }
