@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CaffService} from "../../../service/caff.service";
 import {Caff} from "../../../model/caff.model";
+import {Comment} from "../../../model/comment.model";
 
 @Component({
   selector: 'app-admin-caff-detail',
@@ -22,5 +23,13 @@ export class AdminCaffDetailComponent {
       this.caffService.fetchCaffById(id)
         .subscribe(caff => this.caff = caff);
     }
+  }
+
+  onDeleteComment(comment: Comment) {
+    this.caffService.deleteComment(comment)
+      .subscribe(_ => {
+        const deletedCommentId = this.caff.comments.indexOf(comment);
+        this.caff.comments.splice(deletedCommentId, 1);
+      });
   }
 }

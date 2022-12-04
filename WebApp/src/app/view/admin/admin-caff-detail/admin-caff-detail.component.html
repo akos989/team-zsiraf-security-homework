@@ -3,5 +3,7 @@
   <button class="btn btn-danger">Delete</button>
 </app-caff-detail>
 <div class="mb-5">
-  <app-comment-list [comments]="caff.comments" [isAdmin]="true"></app-comment-list>
+  <app-comment-list [comments]="caff.comments"
+                    [isAdmin]="true"
+                    (onCommentDeleted)="onDeleteComment($event)"></app-comment-list>
 </div>

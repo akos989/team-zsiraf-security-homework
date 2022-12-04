@@ -9,6 +9,7 @@ import {of, tap} from "rxjs";
 import {Caff} from "../model/caff.model";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {Comment} from "../model/comment.model";
 import {CreateCaffDto} from "../model/create-caff-dto";
 import {ModifyCaffDto} from "../model/modify-caff-dto";
 import {Form} from "@angular/forms";
@@ -40,12 +41,6 @@ export class CaffService {
       .pipe(
         tap(caffs => this.saveDistinctCaffs(caffs))
       );
-
-    // const uploadedCaffs: Caff[] = uploadedCallJson;
-    // return of(uploadedCaffs).pipe(delay(1500), tap(caffs => {
-    //   this.allCaffs.push(...caffs);
-    //   this.allCaffs = [...new Set(this.allCaffs)];
-    // }));
   }
 
   fetchPurchasedCaff() {
@@ -54,11 +49,6 @@ export class CaffService {
       .pipe(
         tap(caffs => this.saveDistinctCaffs(caffs))
       );
-    // const purchasedCaffs: Caff[] = purchasedCaffJson;
-    // return of(purchasedCaffs).pipe(delay(2000), tap(caffs => {
-    //   this.allCaffs.push(...caffs);
-    //   this.allCaffs = [...new Set(this.allCaffs)];
-    // }));
   }
 
   fetchCaffById(id: string) {
@@ -87,19 +77,24 @@ export class CaffService {
       )
   }
 
+  downloadCaff(caff: Caff) {
+    // Todo: implement downloadCaff function
+    return of(null);
+  }
+
   addCommentToCaff(caff: Caff, commentText: string) {
     const body = {
       text: commentText,
       caffId: caff.id
     };
-
+    console.log("service: ", body)
     return this.http
-      .post(`${CAFF_BACKEND_URL}/${caff.id}`, body);
+      .post<Comment>(`${CAFF_BACKEND_URL}/${caff.id}`, body);
   }
 
-  downloadCaff(caff: Caff) {
-    // Todo: implement downloadCaff function
-    return of(null);
+  deleteComment(comment: Comment) {
+    return this.http
+      .delete(`${COMMENT_BACKEND_URL}/${comment.id}`);
   }
 
   saveCaff(createCaffDto: FormData) {

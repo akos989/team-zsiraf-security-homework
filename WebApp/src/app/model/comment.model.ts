@@ -1,4 +1,7 @@
 export class Comment {
-  author: string;
-  commentString: string;
+  id: string;
+  text: string;
+  user: {
+    username: string
+  };
 }

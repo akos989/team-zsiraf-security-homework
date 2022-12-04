@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CaffUsageType} from "../../../model/caff-usage-type.enum";
 import {Caff} from "../../../model/caff.model";
@@ -9,7 +9,7 @@ import {CaffService} from "../../../service/caff.service";
   templateUrl: './client-caff-detail.component.html',
   styleUrls: ['./client-caff-detail.component.scss']
 })
-export class ClientCaffDetailComponent {
+export class ClientCaffDetailComponent implements OnInit {
 
   caff: Caff;
   caffUsageType: CaffUsageType;
@@ -20,12 +20,14 @@ export class ClientCaffDetailComponent {
     private router: Router,
     private caffService: CaffService
   ) {
+  }
+
+  ngOnInit() {
     this.getCaffUsageTypeFromRoute();
     this.getCaffFromRouteParam();
   }
 
   private getCaffUsageTypeFromRoute() {
-
     this.caffUsageType = (() => {
       switch (this.route.snapshot.fragment) {
         case CaffUsageType.uploaded: return CaffUsageType.uploaded
@@ -39,7 +41,10 @@ export class ClientCaffDetailComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.caffService.fetchCaffById(id)
-        .subscribe(caff => this.caff = caff);
+        .subscribe(caff => {
+          this.caff = caff;
+          console.log(caff)
+        });
     }
   }
 
@@ -47,13 +52,14 @@ export class ClientCaffDetailComponent {
     this.caffService.purchaseCaff(this.caff)
       .subscribe(_ => {
         this.router.navigate([`/client/${this.caff.id}/caff-detail`], { fragment: CaffUsageType.purchased });
+        this.caffUsageType = CaffUsageType.purchased;
       });
   }
 
   onDelete() {
     this.caffService.deleteCaff(this.caff)
       .subscribe(_ => {
-        this.router.navigate([`/client/uploaded-list`]);
+        this.router.navigate([`/client/uploaded`]);
       });
   }
 
@@ -64,7 +70,15 @@ export class ClientCaffDetailComponent {
       });
   }
 
-  onAddComment() {
-
+  onAddComment(commentText: string) {
+    console.log(commentText);
+    this.caffService.addCommentToCaff(this.caff, commentText)
+      .subscribe(newComment => {
+        console.log(newComment)
+        this.caff.comments.push({
+          id: newComment.id,
+          text: newComment.text,
+          user: {username: newComment.user.username}});
+      });
   }
 }
