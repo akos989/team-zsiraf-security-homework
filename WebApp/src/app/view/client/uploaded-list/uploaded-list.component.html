@@ -1,0 +1,5 @@
+<h1 class="align-text-center my-3">Your uploaded Caffs</h1>
+<div class="center mt-3">
+  <button [routerLink]="['/upload-new']" class="btn btn-primary">Upload new Caff</button>
+</div>
+<app-list [caffList]="caffList" (onItemSelected)="onCaffSelected($event)"></app-list>

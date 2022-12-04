@@ -1,0 +1,16 @@
+img {
+  max-width: 100%;
+  background-size: contain;
+  border-radius: 5px;
+}
+div.justify {
+  text-align: justify;
+}
+div.buttons {
+  ::ng-deep {
+    button {
+      display: block;
+      margin: 15px auto;
+    }
+  }
+}

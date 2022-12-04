@@ -1,0 +1,7 @@
+<app-caff-detail [caff]="caff">
+  <button [routerLink]="['/edit', { state: { editableCaff: caff } }]" class="btn btn-warning">Modify</button>
+  <button class="btn btn-danger">Delete</button>
+</app-caff-detail>
+<div class="mb-5">
+  <app-comment-list [comments]="caff.comments" [isAdmin]="true"></app-comment-list>
+</div>

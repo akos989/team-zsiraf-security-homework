@@ -1,0 +1,13 @@
+<nav class="navbar navbar-expand-lg px-3">
+  <a [routerLink]="['/client']" class="navbar-brand">CAFF Shop</a>
+  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a [routerLink]="['/client/uploaded']" class="nav-item nav-link">Uploaded</a>
+      <a [routerLink]="['/client/purchased']" class="nav-item nav-link">Purchased</a>
+      <a class="nav-item nav-link">Logout</a>
+    </div>
+  </div>
+</nav>

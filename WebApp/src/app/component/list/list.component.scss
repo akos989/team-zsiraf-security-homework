@@ -1,0 +1,21 @@
+div.container {
+  text-align: center;
+  mat-card {
+    max-width: 300px;
+    background-color: var(--element-background-50);
+    color:  var(--element-text-color);
+    cursor: pointer;
+
+    img {
+      background-size: cover;
+    }
+
+    mat-card-content {
+      text-align: center;
+    }
+  }
+
+  mat-card:hover {
+    background-color: var(--element-background-80);
+  }
+}
