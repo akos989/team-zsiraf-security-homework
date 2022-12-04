@@ -9,6 +9,8 @@ import {of, tap} from "rxjs";
 import {Caff} from "../model/caff.model";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {CreateCaffDto} from "../model/create-caff-dto";
+import {ModifyCaffDto} from "../model/modify-caff-dto";
 
 const CAFF_BACKEND_URL = environment.apiUrl + '/Caff';
 const COMMENT_BACKEND_URL = environment.apiUrl + '/Comment';
@@ -97,6 +99,16 @@ export class CaffService {
   downloadCaff(caff: Caff) {
     // Todo: implement downloadCaff function
     return of(null);
+  }
+
+  saveCaff(createCaffDto: CreateCaffDto) {
+    return this.http
+      .post(CAFF_BACKEND_URL, createCaffDto);
+  }
+
+  modifyCaff(modifyCaffDto: ModifyCaffDto) {
+    return this.http
+      .put(CAFF_BACKEND_URL, modifyCaffDto);
   }
 
   private saveDistinctCaffs(newCaffs: Caff[]) {
