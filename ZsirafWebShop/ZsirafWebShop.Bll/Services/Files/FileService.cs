@@ -46,9 +46,9 @@ namespace ZsirafWebShop.Bll.Services.Files
             using (FileStream fs = File.Create(caffFilePath))
             {
                 await file.CopyToAsync(fs);
-
-                CaffParserService.RunParser(caffFilePath, gifFilePath);
             }
+
+            CaffParserService.RunParser(caffFilePath, gifFilePath);
 
             return caffFile;
         }

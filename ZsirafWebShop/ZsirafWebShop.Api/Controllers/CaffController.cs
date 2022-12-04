@@ -23,7 +23,7 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetAllAsync();
 
         [HttpGet("{id}")]
-        public async Task<CaffGifDto> GetSingleAsync(int id)
+        public async Task<CaffDto> GetSingleAsync(int id)
             => await caffService.GetSingleAsync(id);
 
         [HttpGet("download/{id}")]
