@@ -19,13 +19,8 @@ export class CommentListComponent {
   constructor() { }
 
   onCommentSubmitted() {
-    console.log(this.commentForm)
     const commentText = this.commentForm.form.controls['commentInput'].value;
-    console.log(commentText)
-    // if (commentText && commentText === '') {
-    console.log("asdfasdf")
-      this.onCommentAdded.emit(commentText);
-    // }
+    this.onCommentAdded.emit(commentText);
   }
 
   onCommentDeletePressed(comment: Comment) {

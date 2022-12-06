@@ -72,6 +72,7 @@ export class AuthService {
   private navigateAfterLogin(data: LoginResponseDto) {
     if (data.role === 'Admin') {
       this.router.navigate(['/admin']);
+      return;
     }
     this.router.navigate(['/client']);
   }

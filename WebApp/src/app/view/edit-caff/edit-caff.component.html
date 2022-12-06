@@ -1,14 +1,19 @@
 <div class="view-wrapper">
   <h1>{{ title }}</h1>
   <form class="caff-form-wrapper">
-    <!--caff file-->
+    <!--uploaded caff file replacement-->
     <div *ngIf="files.length > 0" class="gif-wrapper input mt-5">
       <img class="gif" src="assets/icon/tick.svg">
       <img class="delete" src="assets/icon/delete.svg" (click)="onDeleteButtonClick()">
     </div>
 
+    <!--caff file-->
+    <div *ngIf="caff?.gifRef" class="gif-wrapper input mt-5">
+      <img class="gif2" mat-card-image [src]="gifUrl + caff?.gifRef" [alt]="caff?.title + ' gif'">
+    </div>
+
     <!--dropzone-->
-    <ngx-dropzone *ngIf="files.length <= 0" class="input mt-5 dropzone" [multiple]="false" (change)="onSelect($event)">
+    <ngx-dropzone *ngIf="files.length <= 0 && !caff?.gifRef" class="input mt-5 dropzone" [multiple]="false" (change)="onSelect($event)">
       <ngx-dropzone-label>Drop your CAFF file here!</ngx-dropzone-label>
     </ngx-dropzone>
 

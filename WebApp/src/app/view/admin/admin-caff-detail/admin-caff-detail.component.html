@@ -1,9 +1,14 @@
-<app-caff-detail [caff]="caff">
-  <button [routerLink]="['/edit', { state: { editableCaff: caff } }]" class="btn btn-warning">Modify</button>
-  <button class="btn btn-danger">Delete</button>
-</app-caff-detail>
-<div class="mb-5">
-  <app-comment-list [comments]="caff.comments"
-                    [isAdmin]="true"
-                    (onCommentDeleted)="onDeleteComment($event)"></app-comment-list>
+<div *ngIf="caff">
+  <app-caff-detail [caff]="caff">
+    <button [routerLink]="['/admin/' + caff.id + '/edit-caff']" class="btn btn-warning">Modify</button>
+    <button class="btn btn-danger" (click)="onDeleteButtonClick()">Delete</button>
+  </app-caff-detail>
+  <div class="row d-flex justify-content-center">
+    <div class="mb-5 col-12 col-md-8">
+      <app-comment-list [comments]="caff.comments"
+                        [isAdmin]="true"
+                        (onCommentDeleted)="onDeleteComment($event)">
+      </app-comment-list>
+    </div>
+  </div>
 </div>

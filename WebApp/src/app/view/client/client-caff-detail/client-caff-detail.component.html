@@ -3,15 +3,17 @@
     <button *ngIf="caffUsageType == allCaffUsageTypes.neutral"
             (click)="onPurchase()"
             class="btn btn-success">Purchase ({{ caff.price }}$)</button>
-    <button *ngIf="caffUsageType == allCaffUsageTypes.purchased || caffUsageType == allCaffUsageTypes.uploaded"
+    <button *ngIf="caffUsageType == allCaffUsageTypes.purchased"
             (click)="onDownload()"
             class="btn btn-primary">Download</button>
     <button *ngIf="caffUsageType == allCaffUsageTypes.uploaded"
             (click)="onDelete()"
             class="btn btn-danger">Delete</button>
   </app-caff-detail>
-  <div class="mb-5">
-    <app-comment-list [comments]="caff.comments"
-                      (onCommentAdded)="onAddComment($event)"></app-comment-list>
+  <div class="row d-flex justify-content-center">
+    <div class="mb-5 col-12 col-md-8">
+      <app-comment-list [comments]="caff.comments"
+                        (onCommentAdded)="onAddComment($event)"></app-comment-list>
+    </div>
   </div>
 </div>

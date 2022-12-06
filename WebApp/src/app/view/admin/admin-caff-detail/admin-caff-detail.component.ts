@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CaffService} from "../../../service/caff.service";
 import {Caff} from "../../../model/caff.model";
 import {Comment} from "../../../model/comment.model";
@@ -13,7 +13,9 @@ export class AdminCaffDetailComponent {
 
   caff: Caff;
 
-  constructor(private route: ActivatedRoute, private caffService: CaffService) {
+  constructor(private route: ActivatedRoute,
+              private caffService: CaffService,
+              private router: Router) {
     this.getCaffFromRouteParam();
   }
 
@@ -31,5 +33,12 @@ export class AdminCaffDetailComponent {
         const deletedCommentId = this.caff.comments.indexOf(comment);
         this.caff.comments.splice(deletedCommentId, 1);
       });
+  }
+
+  onDeleteButtonClick() {
+    this.caffService.deleteCaff(this.caff)
+      .subscribe(() => {
+        this.router.navigate(['/admin']);
+      })
   }
 }

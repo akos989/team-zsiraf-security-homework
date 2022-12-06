@@ -121,6 +121,14 @@ namespace ZsirafWebShop.Bll.Services.Caff
                .Include(a => a.Buyers)
                .FirstOrDefaultAsync(a => a.Id == id);
 
+            var comments = await dbContext.Comments
+                .Where(a => a.CaffId == id)
+                .ToListAsync();
+
+            comments.ForEach(a => a.Caff = null);
+
+            entity.Comments = comments;
+
             return mapper.Map<CaffDto>(entity);
         }
 

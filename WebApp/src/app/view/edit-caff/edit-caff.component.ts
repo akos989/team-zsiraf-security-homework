@@ -8,6 +8,7 @@ import {SuccessDialogComponent} from "../../dialog/success-dialog/success-dialog
 import {first} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ModifyCaffDto} from "../../model/modify-caff-dto";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-caff',
@@ -17,6 +18,7 @@ import {ModifyCaffDto} from "../../model/modify-caff-dto";
 export class EditCaffComponent implements OnInit {
   mode = 'create';
   title = 'Modify your CAFF file';
+  gifUrl = environment.gifUrl;
   caff: Caff;
   files: File[] = [];
 
@@ -36,7 +38,14 @@ export class EditCaffComponent implements OnInit {
 
         const caffId = paramMap.get('id');
         if (caffId) {
-          this.caffService.fetchCaffById(caffId);
+          this.caffService.fetchCaffById(caffId)
+            .subscribe(caff => {
+              this.caff = caff;
+
+              this.nameFormControl.patchValue(caff.title);
+              this.priceFormControl.patchValue(caff.price);
+              this.descriptionFormControl.patchValue(caff.description);
+            });
         }
       } else {
         this.mode = 'create';

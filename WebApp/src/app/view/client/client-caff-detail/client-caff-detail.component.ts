@@ -43,7 +43,6 @@ export class ClientCaffDetailComponent implements OnInit {
       this.caffService.fetchCaffById(id)
         .subscribe(caff => {
           this.caff = caff;
-          console.log(caff)
         });
     }
   }
@@ -68,10 +67,8 @@ export class ClientCaffDetailComponent implements OnInit {
   }
 
   onAddComment(commentText: string) {
-    console.log(commentText);
     this.caffService.addCommentToCaff(this.caff, commentText)
       .subscribe(newComment => {
-        console.log(newComment)
         this.caff.comments.push({
           id: newComment.id,
           text: newComment.text,
