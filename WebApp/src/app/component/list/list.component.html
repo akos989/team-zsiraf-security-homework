@@ -2,7 +2,7 @@
   <div class="row mt-3 d-flex justify-content-center">
     <div *ngFor="let caff of caffList" class="col-sm-12 col-md-6 col-lg-3 mb-5 d-flex justify-content-center">
       <mat-card (click)="selectItem(caff)">
-        <img mat-card-image [src]="caff.gifRef ?? '/assets/gifs/im-downloading-nathan-brown.gif'" [alt]="caff.title + ' gif'">
+        <img mat-card-image [src]="caff.gifRef ? gifUrl + caff.gifRef: '/assets/gifs/im-downloading-nathan-brown.gif'" [alt]="caff.title + ' gif'">
         <mat-card-content>
           <h2>{{ caff.title }}</h2>
           <div>{{ caff.price }}$</div>

@@ -18,7 +18,7 @@ export class ClientCaffDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private caffService: CaffService
+    private caffService: CaffService,
   ) {
   }
 
@@ -64,10 +64,7 @@ export class ClientCaffDetailComponent implements OnInit {
   }
 
   onDownload() {
-    this.caffService.deleteCaff(this.caff)
-      .subscribe(_ => {
-        // Todo: download caff to users computer
-      });
+    this.caffService.downloadCaff(this.caff);
   }
 
   onAddComment(commentText: string) {

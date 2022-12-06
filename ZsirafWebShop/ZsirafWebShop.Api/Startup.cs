@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ZsirafWebShop.Api.AuthorizationHandlers;
@@ -88,14 +89,14 @@ namespace ZsirafWebShop.Api
                     };
                 });
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorsPolicy", builder => builder
-            //        .WithOrigins("http://localhost:3000")
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        .AllowCredentials());
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             services.AddAuthorization(options =>
             {
@@ -105,6 +106,9 @@ namespace ZsirafWebShop.Api
                     policy.Requirements.Add(new CommentCreatorOrAdminRequirement()));
                 options.AddPolicy("Purchased", policy =>
                     policy.Requirements.Add(new PurchasedCaffRequirement()));
+                //options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                //    .RequireAuthenticatedUser()
+                //    .Build();
             });
 
             services.AddSingleton<IAuthorizationHandler, CaffAuthorizationHandler>();
@@ -143,10 +147,24 @@ namespace ZsirafWebShop.Api
             app.UseRouting();
             app.UseHttpException();
 
-            //app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Gifs")),
+                RequestPath = "/Gifs",
+                DefaultContentType = "image/gif"
+            }); 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "CaffFiles")),
+                RequestPath = "/CaffFiles",
+                DefaultContentType = "application/octet-stream"
+            });
+
 
 
             app.UseEndpoints(endpoints =>

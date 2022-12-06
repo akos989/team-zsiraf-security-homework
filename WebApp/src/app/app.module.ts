@@ -35,6 +35,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditCaffComponent } from './view/edit-caff/edit-caff.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
         HttpClientModule,
         MatProgressSpinnerModule,
         NgxDropzoneModule,
-        FormsModule
+        FormsModule,
+        FileSaverModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

@@ -11,6 +11,7 @@ namespace ZsirafWebShop.Bll.Services.Files
         private readonly IHostingEnvironment env;
 
         private readonly string FileDictionary = "CaffFiles";
+        private readonly string GifDictionary = "Gifs";
         private readonly string validExtension = "caff";
 
 
@@ -34,7 +35,7 @@ namespace ZsirafWebShop.Bll.Services.Files
             var fileName = Guid.NewGuid();
 
             var caffFilePath = Path.Combine(fileDic, fileName + $".caff");
-            var gifFilePath = Path.Combine(fileDic, fileName + $".gif");
+            var gifFilePath = Guid.NewGuid() + ".gif";
 
             var caffFile = new CaffFile
             {
@@ -48,7 +49,7 @@ namespace ZsirafWebShop.Bll.Services.Files
                 await file.CopyToAsync(fs);
             }
 
-            CaffParserService.RunParser(caffFilePath, gifFilePath);
+            CaffParserService.RunParser(caffFilePath, Path.Combine(env.ContentRootPath, GifDictionary, gifFilePath));
 
             return caffFile;
         }

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { environment } from 'src/environments/environment';
 import {Caff} from "../../model/caff.model";
 
 @Component({
@@ -9,6 +10,8 @@ import {Caff} from "../../model/caff.model";
 export class ListComponent {
   @Input() caffList: Caff[] = []
   @Output() onItemSelected = new EventEmitter<Caff>();
+
+  gifUrl = environment.gifUrl;
 
   constructor() {
   }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.FileProviders;
 using ZsirafWebShop.Bll.Services.Caff;
 using ZsirafWebShop.Transfer.Models.Caffs;
 
@@ -12,10 +12,12 @@ namespace ZsirafWebShop.Api.Controllers
     public class CaffController : ControllerBase
     {
         private readonly ICaffService caffService;
+        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
 
-        public CaffController(ICaffService caffService)
+        public CaffController(ICaffService caffService, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             this.caffService = caffService;
+            this.env = env;
         }
 
         [HttpGet]
@@ -27,13 +29,15 @@ namespace ZsirafWebShop.Api.Controllers
             => await caffService.GetSingleAsync(id);
 
         [HttpGet("download/{id}")]
-        public async Task<ActionResult> DownloadFileAsync(int id)
+        public async Task<IActionResult> DownloadFileAsync(int id)
         {
             var path = await caffService.DownloadFileAsync(id);
 
             if(System.IO.File.Exists(path))
             {
-                return File(System.IO.File.OpenRead(path), "application/octet-stream", Path.GetFileName(path));
+                var fileBytes = System.IO.File.ReadAllBytes(path);
+
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet);
             }
             return NotFound();
         }

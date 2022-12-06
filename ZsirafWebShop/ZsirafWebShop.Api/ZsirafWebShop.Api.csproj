@@ -24,4 +24,8 @@
     <ProjectReference Include="..\ZsirafWebShop.Dal\ZsirafWebShop.Dal.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Gifs\" />
+  </ItemGroup>
+
 </Project>
