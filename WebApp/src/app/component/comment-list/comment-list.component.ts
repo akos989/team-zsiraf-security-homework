@@ -27,6 +27,7 @@ export class CommentListComponent {
   onCommentSubmitted() {
     const commentText = this.commentForm.form.controls['commentInput'].value;
     this.onCommentAdded.emit(commentText);
+    this.commentForm.form.controls['commentInput'].patchValue('');
   }
 
   onCommentDeletePressed(comment: Comment) {
