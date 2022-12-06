@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 using ZsirafWebShop.Api.AuthorizationHandlers;
 using ZsirafWebShop.Api.Helpers;
 using ZsirafWebShop.Api.Middlewares;
@@ -33,7 +34,8 @@ namespace ZsirafWebShop.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddDbContext<WebShopDbContext>(
                 options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"),

@@ -85,7 +85,7 @@ export class CaffService {
       caffId: caff.id,
     };
     console.log('service: ', body);
-    return this.http.post<Comment>(`${CAFF_BACKEND_URL}/${caff.id}`, body);
+    return this.http.post<Comment>(`${COMMENT_BACKEND_URL}`, body);
   }
 
   deleteComment(comment: Comment) {

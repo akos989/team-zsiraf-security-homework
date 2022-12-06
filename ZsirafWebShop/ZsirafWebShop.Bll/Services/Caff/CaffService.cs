@@ -119,6 +119,7 @@ namespace ZsirafWebShop.Bll.Services.Caff
             var entity = await dbContext.Caffs
                .Include(a => a.Creator)
                .Include(a => a.Buyers)
+               .Include(a => a.Comments)
                .FirstOrDefaultAsync(a => a.Id == id);
 
             return mapper.Map<CaffDto>(entity);
